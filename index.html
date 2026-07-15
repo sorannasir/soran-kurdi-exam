@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دروستکەری پرسیاری تاقیکردنەوە</title>
+    
+    <!-- هێنانی ١٠ فۆنتە نایابەکە لە Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Changa:wght@400;700&family=El+Messiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;700&family=Kufam:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Readex+Pro:wght@400;700&family=Tajawal:wght@400;700&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Naskh Arabic', serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 15px;
+            color: #111;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* بەشی ناساندنی پڕۆژە */
+        .project-banner {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border-right: 8px solid #0284c7;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #0369a1;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+            font-weight: bold;
+            line-height: 1.8;
+        }
+        .project-banner strong {
+            color: #0284c7;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+
+        /* بەشی کۆنترۆڵکردنی فۆنت لە سەرەوە */
+        .global-font-control {
+            background-color: #eef2f7;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #d1d8e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .global-font-control label {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        .global-select {
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 2px solid #2980b9;
+            background-color: white;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* سەرپەڕەی تاقیکردنەوە */
+        .exam-header {
+            border: 2px solid #000;
+            padding: 8px 15px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1.5fr 1fr;
+            gap: 15px;
+            min-height: 90px;
+            background-color: #fff;
+        }
+        
+        .header-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+        }
+        
+        .col-right { text-align: right; }
+        .col-center { text-align: center; align-items: center; }
+        .col-left { text-align: right; }
+
+        .bismillah {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .header-field {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            width: 100%;
+        }
+        
+        .header-field span {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .header-field input {
+            border: none;
+            border-bottom: 1px dotted #888;
+            padding: 1px 5px;
+            width: 100%;
+            background: transparent;
+            font-size: 14px;
+            font-family: inherit;
+            color: #000;
+        }
+        
+        .header-field input:focus {
+            outline: none;
+            border-bottom: 1.5px solid #2980b9;
+        }
+        
+        .center-field { justify-content: center; }
+        .center-field input { text-align: center; max-width: 250px; }
+        
+        /* بەشی پرسیارەکان */
+        .questions-section {
+            margin-top: 10px;
+        }
+        
+        /* جیاکەرەوەی پرسیارە جیاوازەکان بە هێڵێکی تۆخ */
+        .question-block {
+            background: #fff;
+            padding: 10px 0 15px 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            position: relative;
+        }
+        
+        .question-block:last-of-type {
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+
+        /* بەشی پێوانەکردنی فۆسڵەی لاپەڕە لەسەر شاشە */
+        .page-break-indicator {
+            display: none;
+            background-color: #ffeaa7;
+            color: #d35400;
+            border: 1px dashed #e67e22;
+            padding: 6px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .has-page-break .page-break-indicator {
+            display: block;
+        }
+
+        .question-control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            background: #f0f3f6;
+            padding: 4px 10px;
+            border-radius: 4px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* بەشی سەرەکی ناونیشانی پرسیارەکە و نمرە */
+        .question-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .question-label-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 80%;
+        }
+
+        .q-number-label {
+            font-weight: bold;
+            font-size: 16px;
+            white-space: nowrap;
+            color: #000;
+        }
+
+        .question-title-input {
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            background: transparent;
+            padding: 4px;
+            color: #000;
+        }
+
+        .question-title-input:focus {
+            outline: none;
+        }
+
+        /* چوارچێوەی نمرە لە تەنیشت پرسیارەکان */
+        .score-box {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            color: #000;
+        }
+
+        .score-input {
+            width: 35px;
+            text-align: center;
+            border: none;
+            border-bottom: 1px dotted #000;
+            font-weight: bold;
+            font-size: 14px;
+            background: transparent;
+            margin: 0 3px;
+        }
+        .score-input:focus {
+            outline: none;
+            border-bottom: 1.5px solid #2980b9;
+        }
+
+        /* بەشی سەرەکی هەر پرسیارێکی هەڵبژاردن */
+        .mcq-item-box {
+            padding-bottom: 2px;
+            margin-bottom: 4px;
+        }
+
+        /* ستایلی هەڵبژاردنەکان */
+        .options-container {
+            display: grid;
+            gap: 2px 15px;
+            margin-top: 2px;
+            padding-right: 20px;
+        }
+
+        /* شێوازی ١ ڕیز (٤ ستوون) */
+        .options-1-row {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* شێوازی ٢ ڕیز (٢ ستوون) */
+        .options-2-row {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .option-item span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .option-item input {
+            width: 85%;
+            padding: 2px;
+            border: none;
+            font-size: 13px;
+            background: transparent;
+        }
+        .option-item input:focus {
+            outline: none;
+        }
+
+        /* بەشی بەیەکگەیاندن */
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .matching-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .matching-row input {
+            padding: 3px;
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 13px;
+        }
+        .matching-row input:focus {
+            outline: none;
+        }
+
+        /* چوارچێوەی نەخشە و وێنە */
+        .image-placeholder-box {
+            border: 2px dashed #bbb;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+            background: #fff;
+            color: #777;
+            font-size: 13px;
+            border-radius: 6px;
+            padding: 8px;
+            position: relative;
+        }
+
+        .uploaded-img {
+            max-width: 100%;
+            max-height: 180px;
+            margin-top: 5px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        /* بەشی کۆتایی لاپەڕە (مامۆستای وانە و هیوای سەرکەوتن) */
+        .exam-footer {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid #000;
+        }
+
+        .teacher-signature {
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .teacher-signature input {
+            border: none;
+            border-bottom: 1px dotted #000;
+            background: transparent;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: bold;
+            width: 220px;
+            padding: 2px 5px;
+        }
+
+        .teacher-signature input:focus {
+            outline: none;
+            border-bottom: 1.5px solid #2980b9;
+        }
+
+        .good-luck {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        /* دوگمەکانی دروستکەر */
+        .creator-controls {
+            background-color: #fcfcfc;
+            border: 2px solid #2c3e50;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .creator-controls h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-add-type {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-add-type:hover {
+            background-color: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        .btn-delete-block {
+            background-color: #e74c3c;
+            color: white;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-page-break {
+            background-color: #e67e22;
+            color: white;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-page-break.active {
+            background-color: #27ae60;
+        }
+
+        .btn-action {
+            background-color: #2980b9;
+            color: white;
+            padding: 3px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            margin-top: 4px;
+            margin-left: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-action:hover {
+            background-color: #217dbb;
+        }
+
+        .font-selector {
+            padding: 4px;
+            border-radius: 4px;
+            border: 1.5px solid #2980b9;
+            background-color: #fff;
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .btn-download {
+            background-color: #27ae60;
+            color: white;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 25px;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ناوی ١٠ فۆنتەکە */
+        .font-noto { font-family: 'Noto Naskh Arabic', serif !important; }
+        .font-ibm { font-family: 'IBM Plex Sans Arabic', sans-serif !important; }
+        .font-vazir { font-family: 'Vazirmatn', sans-serif !important; }
+        .font-amiri { font-family: 'Amiri', serif !important; }
+        .font-changa { font-family: 'Changa', sans-serif !important; }
+        .font-tajawal { font-family: 'Tajawal', sans-serif !important; }
+        .font-cairo { font-family: 'Cairo', sans-serif !important; }
+        .font-messiri { font-family: 'El Messiri', sans-serif !important; }
+        .font-kufam { font-family: 'Kufam', sans-serif !important; }
+        .font-readex { font-family: 'Readex Pro', sans-serif !important; }
+
+        .simple-answer-line {
+            border: none;
+            border-bottom: 1px dotted #333;
+            width: 100%;
+            margin-top: 8px;
+            background: transparent;
+            height: 20px;
+        }
+
+        /* لادانی چوارچێوە لەسەر سەرجەم ئینپوتە لاوەکییەکان */
+        input[type="text"] {
+            outline: none;
+            border: none; /* لابردنی سەرجەم هێڵەکان بە شێوازی فەرز */
+        }
+
+        /* ستایلی چاپکردن (PDF) */
+        @media print {
+            @page {
+                size: auto;
+                margin: 0;
+            }
+            body { 
+                background: white; 
+                padding: 1.2cm; 
+            }
+            .container { 
+                box-shadow: none; 
+                max-width: 100%; 
+                padding: 0; 
+            }
+            
+            /* شاردنەوەی بەنەر و بەشە کۆنترۆڵکارەکان */
+            .project-banner, button, .global-font-control, .creator-controls, .btn-download, .font-selector, .question-control-bar, .btn-delete-block, .btn-action, input[type="file"], .page-break-indicator { 
+                display: none !important; 
+            }
+            
+            .question-block {
+                border-bottom: 2px solid #000;
+                background: transparent;
+                padding: 8px 0 12px 0;
+                margin-bottom: 15px;
+            }
+            .question-block:last-of-type {
+                border-bottom: none;
+            }
+            .question-title-input {
+                border: none;
+                font-weight: bold;
+            }
+            .option-item input, .matching-row input, .score-input {
+                border: none;
+                background: transparent;
+            }
+            /* دڵنیابوونەوە لە لادانی هێڵەکان لە کاتی چاپدا */
+            .option-item input, .matching-row input, .question-block input[type="text"] {
+                border-bottom: none !important;
+            }
+            .score-input {
+                border-bottom: none;
+            }
+            .exam-header {
+                border: 2px solid #000;
+                margin-bottom: 15px;
+            }
+            .header-field input {
+                border-bottom: none; 
+            }
+            .image-placeholder-box {
+                border: none;
+                padding: 0;
+                min-height: auto;
+            }
+            .image-placeholder-box span {
+                display: none !important;
+            }
+
+            /* ڕێکخستنی کێڵگەی ناوی مامۆستا لە کاتی چاپدا */
+            .teacher-signature input {
+                border-bottom: none !important;
+            }
+
+            /* جێبەجێکردنی دابەشکاری لاپەڕە (Page Break) لە کاتی چاپدا */
+            .has-page-break {
+                page-break-before: always;
+                padding-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="exam-paper">
+    
+    <!-- بەنەری ناساندنی پڕۆژە -->
+    <div class="project-banner">
+        🌸 ئەم پڕۆژەیە ئامادە کراوە لەلایەن <strong>مامۆستا سۆران ناصر کوردی</strong>، مامۆستا لە پەروەردەی شارباژێڕ، بۆ خزمەتی مامۆستایان و ئاسانکاری بۆیان.
+    </div>
+
+    <!-- بەشی گۆڕینی فۆنتی گشتی -->
+    <div class="global-font-control">
+        <label>فۆنتی گشتی تەواوی ماڵپەڕەکە و پرسیارەکان:</label>
+        <select class="global-select" onchange="changeGlobalFont(this.value)">
+            <option value="font-noto">١. فۆنتی Noto Naskh (کلاسیک و فەرمی)</option>
+            <option value="font-ibm">٢. فۆنتی IBM Plex (مۆدێرن و ڕێک)</option>
+            <option value="font-vazir">٣. فۆنتی Vazirmatn (زۆر ڕوون و سادە)</option>
+            <option value="font-amiri">٤. فۆنتی Amiri (تەقلیدی و ڕازاوە)</option>
+            <option value="font-changa">٥. فۆنتی Changa (تۆخ و ئەستوور)</option>
+            <option value="font-tajawal">٦. فۆنتی Tajawal (سەرنجڕاکێش و سەردەمیانە)</option>
+            <option value="font-cairo">٧. فۆنتی Cairo (فەرمی و هاوسەنگ)</option>
+            <option value="font-messiri">٨. فۆنتی El Messiri (هونەری و نەرم)</option>
+            <option value="font-kufam">٩. فۆنتی Kufam (شێوازی کوفی ڕوون)</option>
+            <option value="font-readex">١٠. فۆنتی Readex Pro (ئەندازەیی و مۆدێرن)</option>
+        </select>
+    </div>
+    
+    <!-- بەشی سەرپەڕەی تاقیکردنەوە -->
+    <div class="exam-header">
+        <div class="header-col col-right">
+            <div class="header-field">
+                <span>قوتابخانەی:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="ناونیشانی قوتابخانە">
+            </div>
+            <div class="header-field">
+                <span>بەروار:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="٢٠٢٦/٥/١٥">
+            </div>
+            <div class="header-field">
+                <span>ناوی قوتابی:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="..........................................">
+            </div>
+        </div>
+        
+        <div class="header-col col-center">
+            <div class="bismillah">بسم الله الرحمن الرحیم</div>
+            <div class="header-field center-field">
+                <span>تاقیکردنەوەی:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="60 نمرەی وەرزی دووەم خولی یەکەم">
+            </div>
+            <div class="header-field center-field">
+                <span>ساڵی خوێندنی:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="2025-2026">
+            </div>
+        </div>
+        
+        <div class="header-col col-left">
+            <div class="header-field">
+                <span>بابەت:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="زانست بۆ هەمووان">
+            </div>
+            <div class="header-field">
+                <span>پۆل:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="هەشتەم">
+            </div>
+            <div class="header-field">
+                <span>کات:</span>
+                <input type="text" style="border-bottom: 1px dotted #888;" placeholder="١٢٠ خولەک">
+            </div>
+        </div>
+    </div>
+
+    <!-- بەشی پرسیارەکان -->
+    <div class="questions-section" id="questions-area">
+        <!-- لێرەدا پرسیارەکان بە شێوازی دینامیکی زیاد دەبن -->
+    </div>
+
+    <!-- بەشی کۆتایی لاپەڕە (مامۆستا و بەهیوای سەرکەوتن) -->
+    <div class="exam-footer">
+        <div class="teacher-signature">
+            <span>مامۆستای وانە:</span>
+            <input type="text" style="border-bottom: 1px dotted #000;" placeholder=".......................................">
+        </div>
+        <div class="good-luck">
+            بەهیوای سەرکەوتنتان.
+        </div>
+    </div>
+
+    <!-- پانێڵی کۆنترۆڵکردنی جۆری پرسیارەکان -->
+    <div class="creator-controls">
+        <h3>بەشی هەڵبژاردنی جۆری پرسیارەکان:</h3>
+        <div class="buttons-grid">
+            <button class="btn-add-type" onclick="addQuestionBlock('multiple-choice')">🔘 ١. هەڵبژاردن</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('true-false')">✔️ ٢. ڕاست و هەڵە</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('blank')">✍️ ٣. بۆشایی</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('matching')">🔗 ٤. بەیەکگەیاندن</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('definition')">📖 ٥. پێناسە</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('image-question')">🖼️ ٦. وێنە</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('difference')">⚖️ ٧. جیاوازی</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('reasons')">❓ ٨. هۆکارەکان</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('counting')">🔢 ٩. ژماردن</button>
+            <button class="btn-add-type" onclick="addQuestionBlock('concept-map')">🗺️ ١٠. نەخشەی چەمکەکان</button>
+        </div>
+    </div>
+
+    <button class="btn-download" onclick="window.print()">💾 داگرتن بە شێوازی PDF / چاپکردن</button>
+</div>
+
+<script>
+    let blockCount = 0;
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const arabicLetters = ["أ", "ب", "ج", "د", "هـ", "و", "ز", "ح", "ط", "ی", "ک", "ل", "م", "ن", "س", "ع", "ف", "ص", "ق", "ر", "ش", "ت", "ث", "خ", "ذ", "ض", "ظ", "غ"];
+    const kurdishNumbers = ["یەکەم", "دووەم", "سێیەم", "چوارەم", "پێنجەم", "شەشەم", "حەوتەم", "هەشتەم", "نۆیەم", "دەیەم", "یازدەیەم", "دوازدەیەم", "سێزدەیەم", "چواردەیەم", "پازدەیەم", "شانزەیەم", "حەڤدەیەم", "هەژدەیەم", "نۆزدەیەم", "بیستەم"];
+
+    // نوێکردنەوەی ژمارەی پرسیارەکان
+    function updateQuestionNumbers() {
+        const blocks = document.querySelectorAll('.question-block');
+        blocks.forEach((block, index) => {
+            const label = block.querySelector('.q-number-label');
+            if (label) {
+                const numWord = kurdishNumbers[index] || (index + 1);
+                label.textContent = `پرسیاری ${numWord}:`;
+            }
+        });
+    }
+
+    // گۆڕینی دۆخی دابەشکردنی لاپەڕە (Page Break)
+    function togglePageBreak(blockId) {
+        const block = document.getElementById(blockId);
+        const btn = block.querySelector('.btn-page-break');
+        if (block.classList.contains('has-page-break')) {
+            block.classList.remove('has-page-break');
+            btn.classList.remove('active');
+            btn.textContent = '✂️ هێنانە خوارەوە بۆ لاپەڕەی نوێ';
+        } else {
+            block.classList.add('has-page-break');
+            btn.classList.add('active');
+            btn.textContent = '✅ لەسەر لاپەڕەیەکی نوێیە';
+        }
+    }
+
+    function addQuestionBlock(type) {
+        blockCount++;
+        const area = document.getElementById('questions-area');
+        const currentGlobalFont = document.querySelector('.global-select').value;
+        
+        const block = document.createElement('div');
+        block.className = `question-block ${currentGlobalFont}`;
+        block.id = `block-${blockCount}`;
+        
+        let innerHTMLContent = '';
+        
+        let controlBar = `
+            <div class="question-control-bar">
+                <span>ڕێکخستنی بەش:</span>
+                <select class="font-selector" onchange="changeBlockFont(this)">
+                    <option value="font-noto" ${currentGlobalFont === 'font-noto' ? 'selected' : ''}>Noto Naskh</option>
+                    <option value="font-ibm" ${currentGlobalFont === 'font-ibm' ? 'selected' : ''}>IBM Plex</option>
+                    <option value="font-vazir" ${currentGlobalFont === 'font-vazir' ? 'selected' : ''}>Vazirmatn</option>
+                    <option value="font-amiri" ${currentGlobalFont === 'font-amiri' ? 'selected' : ''}>Amiri</option>
+                    <option value="font-changa" ${currentGlobalFont === 'font-changa' ? 'selected' : ''}>Changa</option>
+                    <option value="font-tajawal" ${currentGlobalFont === 'font-tajawal' ? 'selected' : ''}>Tajawal</option>
+                    <option value="font-cairo" ${currentGlobalFont === 'font-cairo' ? 'selected' : ''}>Cairo</option>
+                    <option value="font-messiri" ${currentGlobalFont === 'font-messiri' ? 'selected' : ''}>El Messiri</option>
+                    <option value="font-kufam" ${currentGlobalFont === 'font-kufam' ? 'selected' : ''}>Kufam</option>
+                    <option value="font-readex" ${currentGlobalFont === 'font-readex' ? 'selected' : ''}>Readex Pro</option>
+                </select>
+                <button class="btn-page-break" onclick="togglePageBreak('block-${blockCount}')">✂️ هێنانە خوارەوە بۆ لاپەڕەی نوێ</button>
+                <button class="btn-delete-block" onclick="deleteBlock('block-${blockCount}')">سڕینەوەی ئەم بەشە</button>
+            </div>
+            <div class="page-break-indicator">✨ ئەم پرسیارە لە کاتی چاپکردندا لە لاپەڕەیەکی نوێوە دەستپێدەکات.</div>
+        `;
+
+        function createHeaderHTML(defaultTitle) {
+            return `
+                <div class="question-title-wrapper">
+                    <div class="question-label-container">
+                        <span class="q-number-label">پرسیار:</span>
+                        <input type="text" class="question-title-input" value="${defaultTitle}">
+                    </div>
+                    <div class="score-box">
+                        [ <input type="text" class="score-input" placeholder=".."> نمرە ]
+                    </div>
+                </div>
+            `;
+        }
+
+        if (type === 'multiple-choice') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('وەڵامی گونجاو هەڵبژێرە لەم خاڵانەی خوارەوەدا:')}
+                
+                <div id="sub-list-${blockCount}" style="margin-top: 5px; display: flex; flex-direction: column; gap: 4px;">
+                    <div class="mcq-item-box" id="mcq-item-${blockCount}-1">
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:5px;">
+                            <div style="display:flex; align-items:center; gap:5px; width: 80%;">
+                                <span class="sub-num" style="font-weight:bold;">١.</span>
+                                <input type="text" style="width:100%; border:none; font-weight:bold; background:transparent;" placeholder="پرسیاری هەڵبژاردن لێرە بنووسە...">
+                            </div>
+                            <div style="display:flex; gap:3px;">
+                                <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#34495e;" onclick="toggleRowLayout(${blockCount}, 1, 'options-1-row')">١ ڕیز</button>
+                                <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#7f8c8d;" onclick="toggleRowLayout(${blockCount}, 1, 'options-2-row')">٢ ڕیز</button>
+                            </div>
+                        </div>
+                        <div class="options-container options-1-row" id="options-${blockCount}-1">
+                            <div class="option-item"><span>A:</span><input type="text" placeholder="بژاردە"></div>
+                            <div class="option-item"><span>B:</span><input type="text" placeholder="بژاردە"></div>
+                            <div class="option-item"><span>C:</span><input type="text" placeholder="بژاردە"></div>
+                            <div class="option-item"><span>D:</span><input type="text" placeholder="بژاردە"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-action" onclick="addMCQQuestionItem(${blockCount})">➕ زیادکردنی خاڵێکی تری هەڵبژاردن (١، ٢، ٣...)</button>
+            `;
+        } else if (type === 'true-false') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('نیشانەی (ڕاست) یان (هەڵە) دابنێ لەبەردەم ڕستەکاندا:')}
+                <div id="sub-list-${blockCount}" style="margin-top: 5px; display: flex; flex-direction: column; gap: 6px;">
+                    <div style="display:flex; justify-content:space-between; align-items: center;">
+                        <span class="sub-num" style="font-weight:bold; margin-left: 5px;">١.</span>
+                        <input type="text" style="width:85%; border:none; padding: 3px; background:transparent;" placeholder="لێرە ڕستەکە بنووسە...">
+                        <span>( &nbsp; &nbsp; &nbsp; &nbsp; )</span>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addSubItem(${blockCount}, 'true-false')">➕ زیادکردنی خاڵێکی تر</button>
+            `;
+        } else if (type === 'blank') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('بۆشاییەکان بە وشەی گونجاو پڕ بکەرەوە:')}
+                <div id="sub-list-${blockCount}" style="margin-top: 5px; display: flex; flex-direction: column; gap: 6px;">
+                    <div style="display:flex; align-items: center;">
+                        <span class="sub-num" style="font-weight:bold; margin-left: 5px;">١.</span>
+                        <input type="text" style="width:100%; border:none; padding: 3px; background:transparent;" placeholder="ڕستەکە بنووسە و بە خاڵ شوێنی بۆشاییەکە دیاری بکە...">
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addSubItem(${blockCount}, 'blank')">➕ زیادکردنی بۆشاییەکی تر</button>
+            `;
+        } else if (type === 'matching') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('کۆمەڵەی (A) بە کۆمەڵەی (B) بگەیەنە:')}
+                <div class="matching-container">
+                    <div class="matching-column" id="matching-A-${blockCount}">
+                        <h4 style="margin:5px 0; font-size:14px;">کۆمەڵەی (A)</h4>
+                        <div class="matching-row"><span>١.</span><input type="text" placeholder="زاراوە"></div>
+                    </div>
+                    <div class="matching-column" id="matching-B-${blockCount}">
+                        <h4 style="margin:5px 0; font-size:14px;">کۆمەڵەی (B)</h4>
+                        <div class="matching-row"><span>أ.</span><input type="text" placeholder="پێناسە"></div>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addMatchingRow(${blockCount})">➕ زیادکردنی دێڕێکی تر بۆ هەردوو لا</button>
+            `;
+        } else if (type === 'definition') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('پێناسەی زاراوەکانی خوارەوە بکە:')}
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display: flex; flex-direction: column; gap: 8px;">
+                    <div>
+                        <span class="sub-num" style="font-weight:bold;">١.</span>
+                        <input type="text" style="font-weight:bold; width:30%; border:none; background:transparent;" placeholder="ناوی زاراوەکە...">
+                        <div class="simple-answer-line"></div>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addSubItem(${blockCount}, 'definition')">➕ زیادکردنی پێناسەیەکی تر</button>
+            `;
+        } else if (type === 'image-question') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('سەیری وێنەکەی خوارەوە بکە و وەڵام بدەرەوە:')}
+                <div class="image-placeholder-box">
+                    <span id="img-text-${blockCount}">🖼️ [وێنەیەک لە ئامێرەکەتەوە هەڵبژێرە]</span>
+                    <input type="file" accept="image/*" onchange="previewImage(event, ${blockCount})" style="margin-top:5px; font-size:11px;">
+                    <img id="img-preview-${blockCount}" class="uploaded-img" alt="وێنە">
+                </div>
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display:flex; flex-direction:column; gap:6px;">
+                    <div style="display:flex; align-items:center;">
+                        <span class="sub-num" style="font-weight:bold; margin-left: 5px;">١.</span>
+                        <input type="text" style="width:100%; border:none; background:transparent;" placeholder="پرسیار دەربارەی وێنەکە بنووسە...">
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addSubItem(${blockCount}, 'image-question')">➕ زیادکردنی پرسیارێکی تر بۆ ئەم وێنەیە</button>
+            `;
+        } else if (type === 'difference') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('جیاوازی بنووسە لە نێوان:')}
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                        <div style="border:1px solid #ccc; padding:8px; min-height:60px;"><input type="text" style="font-weight:bold; border:none; width:100%; background:transparent;" placeholder="بڕگەی یەکەم..."></div>
+                        <div style="border:1px solid #ccc; padding:8px; min-height:60px;"><input type="text" style="font-weight:bold; border:none; width:100%; background:transparent;" placeholder="بڕگەی دووەم..."></div>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addSubItem(${blockCount}, 'difference')">➕ زیادکردنی جیاوازییەکی تر</button>
+            `;
+        } else if (type === 'reasons') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('هۆکاری زانستی چییە بۆ ئەمانەی خوارەوە؟ (تەعلیل):')}
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display: flex; flex-direction: column; gap: 8px;">
+                    <div>
+                        <span class="sub-num" style="font-weight:bold; margin-left: 5px;">١.</span>
+                        <input type="text" style="width:100%; border:none; background:transparent;" placeholder="پرسیارەکە لێرە بنووسە...">
+                        <div class="simple-answer-line"></div>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addSubItem(${blockCount}, 'reasons')">➕ زیادکردنی خاڵێکی تر</button>
+            `;
+        } else if (type === 'counting') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('خاڵەکانی ئەمانەی خوارەوە بنووسە:')}
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display: flex; flex-direction: column; gap: 8px;">
+                    <div id="counting-item-${blockCount}-1" style="padding-bottom: 5px; margin-bottom: 5px;">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="sub-num" style="font-weight:bold;">١.</span>
+                            <input type="text" style="width:70%; border:none; font-weight:bold; background:transparent;" placeholder="لێرە بنووسە چی بژمێرێت...">
+                            <button class="btn-action" style="margin:0; padding:3px 8px; font-size:10px; background-color: #34495e;" onclick="addCountingSubPoint(${blockCount}, 1)">➕ زیادکردنی خاڵ (أ، ب، ج...)</button>
+                        </div>
+                        <div id="counting-sub-list-${blockCount}-1" style="margin-top:4px; padding-right:20px; display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.6;">
+                            <div>أ. _________________________________</div>
+                            <div>ب. _________________________________</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-action" onclick="addCountingMainItem(${blockCount})">➕ زیادکردنی پرسیارێکی تری ژماردن (١، ٢، ٣...)</button>
+            `;
+        } else if (type === 'concept-map') {
+            innerHTMLContent = `
+                ${controlBar}
+                ${createHeaderHTML('نەخشەی چەمکی خوارەوە تەواو بکە:')}
+                <div class="image-placeholder-box" style="border: 2px dashed #2980b9;">
+                    <span id="img-text-${blockCount}">🗺️ [وێنەی نەخشەی چەمکەکە لێرە باربکە]</span>
+                    <input type="file" accept="image/*" onchange="previewImage(event, ${blockCount})" style="margin-top:5px; font-size:11px;">
+                    <img id="img-preview-${blockCount}" class="uploaded-img" alt="نەخشە">
+                </div>
+            `;
+        }
+
+        block.innerHTML = innerHTMLContent;
+        area.appendChild(block);
+        
+        updateQuestionNumbers();
+    }
+
+    function addMCQQuestionItem(blockId) {
+        const list = document.getElementById(`sub-list-${blockId}`);
+        const currentItemsCount = list.children.length + 1;
+        
+        const mcqItem = document.createElement('div');
+        mcqItem.className = 'mcq-item-box';
+        mcqItem.id = `mcq-item-${blockId}-${currentItemsCount}`;
+        
+        mcqItem.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:5px;">
+                <div style="display:flex; align-items:center; gap:5px; width: 80%;">
+                    <span class="sub-num" style="font-weight:bold;">${currentItemsCount}.</span>
+                    <input type="text" style="width:100%; border:none; font-weight:bold; background:transparent;" placeholder="پرسیار لێرە بنووسە...">
+                </div>
+                <div style="display:flex; gap:3px;">
+                    <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#34495e;" onclick="toggleRowLayout(${blockId}, ${currentItemsCount}, 'options-1-row')">١ ڕیز</button>
+                    <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#7f8c8d;" onclick="toggleRowLayout(${blockId}, ${currentItemsCount}, 'options-2-row')">٢ ڕیز</button>
+                </div>
+            </div>
+            <div class="options-container options-1-row" id="options-${blockId}-${currentItemsCount}">
+                <div class="option-item"><span>A:</span><input type="text" placeholder="بژاردە"></div>
+                <div class="option-item"><span>B:</span><input type="text" placeholder="بژاردە"></div>
+                <div class="option-item"><span>C:</span><input type="text" placeholder="بژاردە"></div>
+                <div class="option-item"><span>D:</span><input type="text" placeholder="بژاردە"></div>
+            </div>
+        `;
+        list.appendChild(mcqItem);
+    }
+
+    function addCountingMainItem(blockId) {
+        const list = document.getElementById(`sub-list-${blockId}`);
+        const currentCount = list.children.length + 1;
+        
+        const div = document.createElement('div');
+        div.id = `counting-item-${blockId}-${currentCount}`;
+        div.style = "padding-bottom: 5px; margin-bottom: 5px;";
+        
+        div.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span class="sub-num" style="font-weight:bold;">${currentCount}.</span>
+                <input type="text" style="width:70%; border:none; font-weight:bold; background:transparent;" placeholder="لێرە بنووسە چی بژمێرێت...">
+                <button class="btn-action" style="margin:0; padding:3px 8px; font-size:10px; background-color: #34495e;" onclick="addCountingSubPoint(${blockId}, ${currentCount})">➕ زیادکردنی خاڵ (أ، ب، ج...)</button>
+            </div>
+            <div id="counting-sub-list-${blockId}-${currentCount}" style="margin-top:4px; padding-right:20px; display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.6;">
+                <div>أ. _________________________________</div>
+                <div>ب. _________________________________</div>
+            </div>
+        `;
+        list.appendChild(div);
+    }
+
+    function addCountingSubPoint(blockId, itemId) {
+        const subList = document.getElementById(`counting-sub-list-${blockId}-${itemId}`);
+        const currentSubCount = subList.children.length;
+        const letter = arabicLetters[currentSubCount % arabicLetters.length];
+        
+        const newPoint = document.createElement('div');
+        newPoint.innerHTML = `${letter}. _________________________________`;
+        subList.appendChild(newPoint);
+    }
+
+    function toggleRowLayout(blockId, itemId, layoutClass) {
+        const container = document.getElementById(`options-${blockId}-${itemId}`);
+        if (container) {
+            container.className = `options-container ${layoutClass}`;
+        }
+    }
+
+    function addSubItem(id, type) {
+        const list = document.getElementById(`sub-list-${id}`);
+        const count = list.children.length + 1;
+        const div = document.createElement('div');
+        
+        if (type === 'true-false') {
+            div.style = "display:flex; justify-content:space-between; align-items: center;";
+            div.innerHTML = `
+                <span class="sub-num" style="font-weight:bold; margin-left: 5px;">${count}.</span>
+                <input type="text" style="width:85%; border:none; padding: 3px; background:transparent;" placeholder="لێرە ڕستەکە بنووسە...">
+                <span>( &nbsp; &nbsp; &nbsp; &nbsp; )</span>
+            `;
+        } else if (type === 'blank') {
+            div.style = "display:flex; align-items: center;";
+            div.innerHTML = `
+                <span class="sub-num" style="font-weight:bold; margin-left: 5px;">${count}.</span>
+                <input type="text" style="width:100%; border:none; padding: 3px; background:transparent;" placeholder="ڕستەکە بنووسە...">
+            `;
+        } else if (type === 'definition') {
+            div.innerHTML = `
+                <span class="sub-num" style="font-weight:bold;">${count}.</span>
+                <input type="text" style="font-weight:bold; width:30%; border:none; background:transparent;" placeholder="ناوی زاراوەکە...">
+                <div class="simple-answer-line"></div>
+            `;
+        } else if (type === 'image-question') {
+            div.style = "display:flex; align-items:center;";
+            div.innerHTML = `
+                <span class="sub-num" style="font-weight:bold; margin-left: 5px;">${count}.</span>
+                <input type="text" style="width:100%; border:none; background:transparent;" placeholder="پرسیار دەربارەی وێنەکە بنووسە...">
+            `;
+        } else if (type === 'reasons') {
+            div.innerHTML = `
+                <span class="sub-num" style="font-weight:bold; margin-left: 5px;">${count}.</span>
+                <input type="text" style="width:100%; border:none; background:transparent;" placeholder="پرسیارەکە لێرە بنووسە...">
+                <div class="simple-answer-line"></div>
+            `;
+        } else if (type === 'difference') {
+            div.style = "display:grid; grid-template-columns:1fr 1fr; gap:15px;";
+            div.innerHTML = `
+                <div style="border:1px solid #ccc; padding:8px; min-height:60px; background:transparent;"><input type="text" style="font-weight:bold; border:none; width:100%; background:transparent;" placeholder="بڕگەی یەکەم..."></div>
+                <div style="border:1px solid #ccc; padding:8px; min-height:60px; background:transparent;"><input type="text" style="font-weight:bold; border:none; width:100%; background:transparent;" placeholder="بڕگەی دووەم..."></div>
+            `;
+        }
+        list.appendChild(div);
+    }
+
+    function addMatchingRow(id) {
+        const colA = document.getElementById(`matching-A-${id}`);
+        const colB = document.getElementById(`matching-B-${id}`);
+        
+        const countA = colA.children.length;
+        const letterB = arabicLetters[(colB.children.length - 1) % arabicLetters.length];
+
+        const rowA = document.createElement('div');
+        rowA.className = 'matching-row';
+        rowA.innerHTML = `<span>${countA}.</span><input type="text" placeholder="زاراوە">`;
+        
+        const rowB = document.createElement('div');
+        rowB.className = 'matching-row';
+        rowB.innerHTML = `<span>${letterB}.</span><input type="text" placeholder="پێناسە">`;
+
+        colA.appendChild(rowA);
+        colB.appendChild(rowB);
+    }
+
+    function previewImage(event, id) {
+        const input = event.target;
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById(`img-preview-${id}`);
+                const text = document.getElementById(`img-text-${id}`);
+                img.src = e.target.result;
+                img.style.display = 'block';
+                text.style.display = 'none';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function deleteBlock(id) {
+        document.getElementById(id).remove();
+        updateQuestionNumbers();
+    }
+
+    // گۆڕینی فۆنتی هەر بەشێک بە جیا
+    function changeBlockFont(selectElement) {
+        const fontClass = selectElement.value;
+        const block = selectElement.closest('.question-block');
+        
+        // پاراستنی کلاسی لاپەڕەی نوێ ئەگەر بوونی هەبێت
+        const hasPageBreak = block.classList.contains('has-page-break');
+        block.className = `question-block ${fontClass} ${hasPageBreak ? 'has-page-break' : ''}`;
+    }
+
+    // گۆڕینی فۆنتی گشتی تەواوی ماڵپەڕەکە
+    function changeGlobalFont(fontClass) {
+        document.body.className = fontClass;
+        const blocks = document.querySelectorAll('.question-block');
+        blocks.forEach(block => {
+            const hasPageBreak = block.classList.contains('has-page-break');
+            block.className = `question-block ${fontClass} ${hasPageBreak ? 'has-page-break' : ''}`;
+        });
+        
+        const selectors = document.querySelectorAll('.font-selector');
+        selectors.forEach(select => {
+            select.value = fontClass;
+        });
+    }
+</script>
+
+</body>
+</html>
