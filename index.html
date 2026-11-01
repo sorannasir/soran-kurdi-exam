@@ -7,7 +7,7 @@
     
     <meta http-equiv="Content-Language" content="ku,ar,en">
     
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Changa:wght@400;700&family=El+Messiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;700&family=Kufam:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Readex+Pro:wght@400;700&family=Tajawal:wght@400;700&family=Vazirmatn:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Amiri:wght@400;700&family=Baloo+Bhaijaan+2:wght@500;700&family=Cairo:wght@400;700&family=Changa:wght@400;700&family=El+Messiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;700&family=Kufam:wght@400;700&family=Lalezar&family=Markazi+Text:wght@500;700&family=Noto+Kufi+Arabic:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Readex+Pro:wght@400;700&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;700&family=Vazirmatn:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -104,6 +104,9 @@
         }
         .btn-save-main:hover {
             background-color: #219a52;
+        }
+        .btn-save-main.save-success {
+            background-color: #1e8449;
         }
 
         .btn-load-main {
@@ -327,6 +330,205 @@
         
         .question-control-bar * {
             font-family: inherit !important;
+        }
+        .math-tool-wrapper {
+            position: relative;
+        }
+        .math-symbol-trigger {
+            min-width: 30px;
+            padding: 3px 10px;
+            border: 1.5px solid #0f172a;
+            border-radius: 4px;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.15s;
+        }
+        .math-symbol-trigger:hover {
+            background: #334155;
+            border-color: #334155;
+        }
+        .math-palette {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;
+            width: min(880px, calc(100vw - 24px));
+            max-height: 55vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 14px;
+            border: 2px solid #0f172a;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.28);
+            direction: rtl;
+        }
+        .math-palette[hidden] {
+            display: none !important;
+        }
+        .soran-kb-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .soran-kb-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .soran-kb-actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .soran-kb-tool {
+            padding: 4px 10px;
+            background: #ffffff;
+            border: 1px solid #0f172a;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #0f172a;
+        }
+        .soran-kb-tool:hover {
+            background: #0f172a;
+            color: #ffffff;
+        }
+        .soran-panel-section {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .soran-panel-section.priority-high {
+            border: 2px solid #0f172a;
+            background: #fafafa;
+        }
+        .soran-section-header {
+            font-size: 12px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .soran-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            background: #e2e8f0;
+            color: #0f172a;
+            border-radius: 4px;
+        }
+        .soran-key-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .soran-key-grid.grid-14 {
+            grid-template-columns: repeat(14, 1fr);
+        }
+        @media (max-width: 850px) {
+            .soran-key-grid, .soran-key-grid.grid-14 {
+                grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+            }
+        }
+        .soran-key {
+            height: 42px;
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: "Cambria Math", "Latin Modern Math", "Times New Roman", serif !important;
+            font-weight: 600;
+            cursor: pointer;
+            color: #000000;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            direction: ltr;
+            user-select: none;
+            transition: all 0.1s ease;
+            padding: 2px;
+        }
+        .soran-key.key-num {
+            background: #f8fafc;
+            border-color: #64748b;
+            font-weight: 700;
+        }
+        .soran-key:hover {
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
+        }
+        .soran-key .lbl-sub {
+            font-size: 9px;
+            font-weight: 500;
+            color: #64748b;
+            margin-top: -2px;
+        }
+        .soran-key:hover .lbl-sub {
+            color: #e2e8f0;
+        }
+        /* بۆکسی هاوکێشەی زیندووی MathLive لە ناو پرسیارەکاندا */
+        math-field.inline-math-field {
+            display: inline-block;
+            vertical-align: middle;
+            background: transparent;
+            border: 1px dashed transparent;
+            border-radius: 4px;
+            padding: 1px 4px;
+            margin: 0 2px;
+            font-size: inherit;
+            color: inherit;
+            direction: ltr;
+            min-width: 24px;
+            outline: none;
+            --keyboard-toggle-glyph: none;
+            --menu-toggle-glyph: none;
+        }
+        math-field.inline-math-field:focus-within {
+            border-color: #2980b9;
+            background: rgba(41, 128, 185, 0.05);
+        }
+        math-field.inline-math-field::part(menu-toggle),
+        math-field.inline-math-field::part(virtual-keyboard-toggle) {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        .rich-input-clone {
+            display: inline-block;
+            width: 100%;
+            min-height: 26px;
+            padding: 2px 4px;
+            outline: none;
+            background: transparent;
+            line-height: 1.6;
+            vertical-align: middle;
+            overflow-wrap: anywhere;
+        }
+        .rich-input-clone:empty::before {
+            content: attr(data-placeholder);
+            color: #888;
+            pointer-events: none;
         }
 
         .question-title-wrapper {
@@ -581,6 +783,119 @@
             color: #555;
         }
 
+        .mcq-image-upload {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border: 0;
+            border-radius: 4px;
+            background: #2980b9;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .mcq-image-upload:hover {
+            background: #1a6b8a;
+        }
+        .mcq-image-preview {
+            max-width: 100%;
+            max-height: 2in;
+            object-fit: contain;
+        }
+        .writing-composer {
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .writing-editor-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 6px 8px;
+            border-bottom: 1px solid #ddd;
+            direction: ltr;
+        }
+        .writing-editor-tools {
+            display: none;
+            margin: 0;
+        }
+        .writing-editor-tools.show {
+            display: flex;
+        }
+        .writing-editor-tools button.active {
+            background: #27ae60;
+        }
+        .writing-editor {
+            width: 100%;
+            min-height: 160px;
+            padding: 8px;
+            outline: none;
+            overflow-wrap: anywhere;
+            line-height: 1.8;
+            direction: rtl;
+            text-align: right;
+        }
+        .writing-editor:empty::before {
+            content: attr(data-placeholder);
+            color: #888;
+            pointer-events: none;
+        }
+        .writing-inline-image {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
+            margin: 4px 8px;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+        }
+        .writing-inline-image.is-selected {
+            outline: 2px solid #2980b9;
+            outline-offset: 2px;
+        }
+        .writing-inline-image[data-align="left"] {
+            float: left;
+        }
+        .writing-inline-image[data-align="right"] {
+            float: right;
+        }
+        .mcq-question-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5px;
+        }
+        .mcq-question-field {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex: 1;
+            min-width: 0;
+        }
+        .mcq-question-field input {
+            flex: 1;
+            min-width: 60px;
+        }
+        .mcq-row-actions {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+        .mcq-row-actions .mcq-image-upload {
+            padding: 2px 6px;
+            min-height: 24px;
+        }
+        .mcq-row-actions .btn-action {
+            margin: 0;
+            padding: 2px 6px;
+            font-size: 10px;
+        }
+
         .writing-textarea {
             width: 100%;
             min-height: 120px;
@@ -744,7 +1059,7 @@
         }
 
         .btn-download {
-            background-color: #27ae60;
+            background-color: #e67e22;
             color: white;
             width: 100%;
             font-size: 16px;
@@ -755,6 +1070,11 @@
             border: none;
             cursor: pointer;
             font-family: inherit !important;
+            transition: background-color 0.2s;
+        }
+
+        .btn-download:hover {
+            background-color: #d35400;
         }
 
         .exam-footer {
@@ -818,16 +1138,93 @@
             margin-top: 10px;
         }
 
-        .font-noto, .font-noto * { font-family: 'Noto Naskh Arabic', serif !important; }
-        .font-ibm, .font-ibm * { font-family: 'IBM Plex Sans Arabic', sans-serif !important; }
-        .font-vazir, .font-vazir * { font-family: 'Vazirmatn', sans-serif !important; }
-        .font-amiri, .font-amiri * { font-family: 'Amiri', serif !important; }
-        .font-changa, .font-changa * { font-family: 'Changa', sans-serif !important; }
-        .font-tajawal, .font-tajawal * { font-family: 'Tajawal', sans-serif !important; }
-        .font-cairo, .font-cairo * { font-family: 'Cairo', sans-serif !important; }
-        .font-messiri, .font-messiri * { font-family: 'El Messiri', sans-serif !important; }
-        .font-kufam, .font-kufam * { font-family: 'Kufam', sans-serif !important; }
-        .font-readex, .font-readex * { font-family: 'Readex Pro', sans-serif !important; }
+        @font-face {
+            font-family: 'Rudaw';
+            src: local('Rudaw'), local('RudawRegular'), local('Rudaw-Regular'), local('UniQAIDAR_Rudaw'),
+                 url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Medium.woff2') format('woff2'),
+                 url('./fonts/rudaw.woff2') format('woff2');
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Speda';
+            src: local('Speda'), local('Speda Font'), local('UniSpeda'), local('UniQAIDAR_Speda'),
+                 url('https://fonts.gstatic.com/s/notokufiarabic/v21/CSRp4ydQnPyaDxEXLFF6LZVLKrodhu8t57o1kDc5Wh5v3obPnLSm.woff2') format('woff2'),
+                 url('./fonts/speda.woff2') format('woff2');
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'NRT';
+            src: local('NRT'), local('NRT Reg'), local('NRT-Reg'), local('UniQAIDAR_NRT'),
+                 url('https://fonts.gstatic.com/s/almarai/v12/tsstApxBaigK_hnnS_antnq3.woff2') format('woff2'),
+                 url('./fonts/nrt.woff2') format('woff2');
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Korsat';
+            src: local('Kurdsat'), local('Korsat'), local('UniKurdsat'), local('UniQAIDAR_Kurdsat'),
+                 url('https://fonts.gstatic.com/s/baloobhaijaan2/v19/zYXwKUwuEqdVGqM8tPDdAA_Y-_bMKo1EhQd2tWxo8Tw.woff2') format('woff2'),
+                 url('./fonts/korsat.woff2') format('woff2');
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Ava';
+            src: local('Ava'), local('IBM Plex Sans Arabic'),
+                 url('https://fonts.gstatic.com/s/ibmplexsansarabic/v11/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Y43.woff2') format('woff2'),
+                 url('./fonts/ibm-plex-arabic-regular.ttf') format('truetype');
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Ava';
+            src: local('Ava Bold'), local('IBM Plex Sans Arabic Bold'),
+                 url('https://fonts.gstatic.com/s/ibmplexsansarabic/v11/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6Yef_dCT.woff2') format('woff2'),
+                 url('./fonts/ibm-plex-arabic-bold.ttf') format('truetype');
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'KRG-MOE';
+            src: local('Unikurd Web'), local('UniKurd Web'), local('Unikurd Nali'), local('Ali-K-Sahifa'), local('Scheherazade New'),
+                 url('https://fonts.gstatic.com/s/scheherazadenew/v15/4UaZrFhTvxVnHDvUkUiHg8jprP4DOwFmO24p.woff2') format('woff2');
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'KRG-MOE';
+            src: local('Unikurd Web Bold'), local('Scheherazade New Bold'),
+                 url('https://fonts.gstatic.com/s/scheherazadenew/v15/4UaerFhTvxVnHDvUkUiHg8jprP4DOwVsOm4p8LbB.woff2') format('woff2');
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        .font-moe, .font-moe *:not(.soran-key):not(.soran-key *) { font-family: 'KRG-MOE', 'Scheherazade New', 'Unikurd Web', 'Noto Naskh Arabic', serif !important; }
+        .font-noto, .font-noto *:not(.soran-key):not(.soran-key *) { font-family: 'Noto Naskh Arabic', serif !important; }
+        .font-rudaw, .font-rudaw *:not(.soran-key):not(.soran-key *) { font-family: 'Rudaw', 'Almarai', 'Cairo', sans-serif !important; }
+        .font-speda, .font-speda *:not(.soran-key):not(.soran-key *) { font-family: 'Speda', 'Noto Kufi Arabic', 'Changa', sans-serif !important; }
+        .font-nrt, .font-nrt *:not(.soran-key):not(.soran-key *) { font-family: 'NRT', 'Almarai', 'Tajawal', sans-serif !important; }
+        .font-ava, .font-ava *:not(.soran-key):not(.soran-key *) { font-family: 'Ava', 'IBM Plex Sans Arabic', 'Readex Pro', sans-serif !important; }
+        .font-korsat, .font-korsat *:not(.soran-key):not(.soran-key *) { font-family: 'Korsat', 'Baloo Bhaijaan 2', 'Readex Pro', sans-serif !important; }
+        .font-ibm, .font-ibm *:not(.soran-key):not(.soran-key *) { font-family: 'IBM Plex Sans Arabic', sans-serif !important; }
+        .font-vazir, .font-vazir *:not(.soran-key):not(.soran-key *) { font-family: 'Vazirmatn', sans-serif !important; }
+        .font-amiri, .font-amiri *:not(.soran-key):not(.soran-key *) { font-family: 'Amiri', serif !important; }
+        .font-changa, .font-changa *:not(.soran-key):not(.soran-key *) { font-family: 'Changa', sans-serif !important; }
+        .font-tajawal, .font-tajawal *:not(.soran-key):not(.soran-key *) { font-family: 'Tajawal', sans-serif !important; }
+        .font-cairo, .font-cairo *:not(.soran-key):not(.soran-key *) { font-family: 'Cairo', sans-serif !important; }
+        .font-messiri, .font-messiri *:not(.soran-key):not(.soran-key *) { font-family: 'El Messiri', sans-serif !important; }
+        .font-kufam, .font-kufam *:not(.soran-key):not(.soran-key *) { font-family: 'Kufam', sans-serif !important; }
+        .font-readex, .font-readex *:not(.soran-key):not(.soran-key *) { font-family: 'Readex Pro', sans-serif !important; }
 
         .simple-answer-line {
             border: none;
@@ -835,7 +1232,10 @@
             width: 100%;
             margin-top: 8px;
             background: transparent;
-            height: 20px;
+            min-height: 24px;
+            outline: none;
+            padding: 1px 4px;
+            line-height: 1.5;
         }
 
         input[type="text"] {
@@ -846,6 +1246,31 @@
 
         #fileInput {
             display: none !important;
+        }
+
+        .file-status {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 10000;
+            max-width: min(420px, calc(100vw - 40px));
+            padding: 11px 16px;
+            border: 1px solid #b9d9c5;
+            border-radius: 8px;
+            background: #e9f7ef;
+            color: #176b3a;
+            font-size: 13px;
+            box-shadow: 0 4px 16px #0002;
+        }
+
+        .file-status.error {
+            border-color: #e5b7b7;
+            background: #fff0f0;
+            color: #8c2525;
+        }
+
+        .file-status:empty {
+            display: none;
         }
 
         .lang-text {
@@ -906,6 +1331,7 @@
             .btn-page-break,
             .question-font-control,
             input[type="file"],
+            .mcq-image-upload,
             .page-break-indicator,
             .image-controls,
             .question-number-badge,
@@ -941,7 +1367,9 @@
             .question-block input[type="text"],
             .writing-textarea,
             .handwriting-text,
-            .handwriting-line {
+            .handwriting-line,
+            .rich-input-clone,
+            math-field.inline-math-field {
                 border: none !important;
                 background: transparent !important;
                 box-shadow: none !important;
@@ -964,11 +1392,18 @@
                 padding: 0 !important;
                 min-height: auto !important;
             }
+            .writing-composer {
+                border: none !important;
+            }
             .image-placeholder-box span {
                 display: none !important;
             }
             .uploaded-img {
                 max-height: 300px !important;
+            }
+            .mcq-image-preview {
+                max-width: 2in !important;
+                max-height: 2in !important;
             }
             
             .teacher-signature input {
@@ -998,6 +1433,8 @@
             }
         }
     </style>
+    <!-- MathLive بۆ تێکردن و پیشاندانی هاوکێشە بیرکارییەکان -->
+    <script defer src="https://unpkg.com/mathlive"></script>
 </head>
 <body>
 
@@ -1005,9 +1442,9 @@
     
     <!-- بەنەر -->
     <div class="project-banner">
-        <span class="lang-text" data-lang="ku">🧡 ئەم پڕۆژەیە ئامادە کراوە لەلایەن <strong>مامۆستا سۆران ناصر کوردی</strong>، مامۆستا لە پەروەردەی شارباژێڕ، بۆ خزمەتی مامۆستایان و ئاسانکاری بۆیان.</span>
-        <span class="lang-text" data-lang="ar">🧡 هذا المشروع من إعداد <strong>الأستاذ سوران ناصر الكوردي</strong>، معلم في تربية شارباژێڕ، لخدمة المعلمين وتسهيلاً لهم.</span>
-        <span class="lang-text" data-lang="en">🧡 This project is prepared by <strong>Teacher Soran Naser Kurdi</strong>, a teacher in Sharbazher Education, to serve teachers and make it easier for them.</span>
+        <span class="lang-text" data-lang="ku">🌸 ئەم پڕۆژەیە ئامادە کراوە لەلایەن <strong>مامۆستا سۆران ناصر کوردی</strong>، مامۆستا لە پەروەردەی شارباژێڕ، بۆ خزمەتی مامۆستایان و ئاسانکاری بۆیان.</span>
+        <span class="lang-text" data-lang="ar">🌸 هذا المشروع من إعداد <strong>الأستاذ سوران ناصر الكوردي</strong>، معلم في تربية شارباژێڕ، لخدمة المعلمين وتسهيلاً لهم.</span>
+        <span class="lang-text" data-lang="en">🌸 This project is prepared by <strong>Teacher Soran Naser Kurdi</strong>, a teacher in Sharbazher Education, to serve teachers and make it easier for them.</span>
     </div>
 
     <!-- کۆنترۆڵەکان -->
@@ -1019,7 +1456,13 @@
                 <span class="lang-text" data-lang="en">Font:</span>
             </label>
             <select class="global-select" id="globalFontSelect" onchange="changeGlobalFont(this.value)">
+                <option value="font-moe">فۆنتی وەزارەتی پەروەردە (KRG MOE)</option>
                 <option value="font-noto">Noto Naskh</option>
+                <option value="font-rudaw">ڕووداو (Rudaw)</option>
+                <option value="font-speda">سپێدە (Speda)</option>
+                <option value="font-nrt">ئێن ئاڕ تی (NRT)</option>
+                <option value="font-ava">ئاڤا (Ava)</option>
+                <option value="font-korsat">کوردسات (Kurdsat)</option>
                 <option value="font-ibm">IBM Plex</option>
                 <option value="font-vazir">Vazirmatn</option>
                 <option value="font-amiri">Amiri</option>
@@ -1151,7 +1594,7 @@
             <button class="btn-add-type btn-type-8" onclick="addQuestionBlock('reasons')">٨. <span class="lang-text" data-lang="ku">هۆکار</span><span class="lang-text" data-lang="ar">أسباب</span><span class="lang-text" data-lang="en">Reasons</span></button>
             <button class="btn-add-type btn-type-9" onclick="addQuestionBlock('counting')">٩. <span class="lang-text" data-lang="ku">ژماردن</span><span class="lang-text" data-lang="ar">عد</span><span class="lang-text" data-lang="en">Count</span></button>
             <button class="btn-add-type btn-type-10" onclick="addQuestionBlock('concept-map')">١٠. <span class="lang-text" data-lang="ku">نەخشەی چەمک</span><span class="lang-text" data-lang="ar">خريطة</span><span class="lang-text" data-lang="en">Map</span></button>
-            <button class="btn-add-type btn-type-11" onclick="addQuestionBlock('writing')">١١. <span class="lang-text" data-lang="ku">نوسراو</span><span class="lang-text" data-lang="ar">كتابة</span><span class="lang-text" data-lang="en">Write</span></button>
+            <button class="btn-add-type btn-type-11" onclick="addQuestionBlock('writing')">١١. <span class="lang-text" data-lang="ku">پرسیاری ئازاد</span><span class="lang-text" data-lang="ar">سؤال مفتوح</span><span class="lang-text" data-lang="en">Open question</span></button>
             <button class="btn-add-type btn-type-12" onclick="addQuestionBlock('darashtin')">١٢. <span class="lang-text" data-lang="ku">داڕشتن</span><span class="lang-text" data-lang="ar">تنسيق</span><span class="lang-text" data-lang="en">Format</span></button>
             <button class="btn-add-type btn-type-13" onclick="addQuestionBlock('imla')">١٣. <span class="lang-text" data-lang="ku">ئیملا</span><span class="lang-text" data-lang="ar">إملاء</span><span class="lang-text" data-lang="en">Dictate</span></button>
             <button class="btn-add-type btn-type-14" onclick="addQuestionBlock('khoshnusi')">١٤. <span class="lang-text" data-lang="ku">خۆشنوسی</span><span class="lang-text" data-lang="ar">خط</span><span class="lang-text" data-lang="en">Write</span></button>
@@ -1163,7 +1606,8 @@
         <span class="lang-text" data-lang="ar">🖨️ طباعة / PDF</span>
         <span class="lang-text" data-lang="en">🖨️ Print / PDF</span>
     </button>
-    <input type="file" id="fileInput" accept=".json" onchange="loadFile(event)">
+    <input type="file" id="fileInput" accept=".json,application/json" onchange="loadFile(event)">
+    <div id="fileStatus" class="file-status" role="status" aria-live="polite"></div>
 </div>
 
 <script>
@@ -1172,6 +1616,128 @@
     const arabicLetters = ["أ", "ب", "ج", "د", "هـ", "و", "ز", "ح", "ط", "ی", "ک", "ل", "م", "ن", "س", "ع", "ف", "ص", "ق", "ر", "ش", "ت", "ث", "خ", "ذ", "ض", "ظ", "غ"];
 
     const imageSizes = {};
+    const imageAlignments = {};
+    const writingSelections = {};
+    const selectedWritingImages = {};
+    let mathTarget = null;
+    let mathSelectionRange = null;
+    let mathSelectionStart = null;
+    let mathSelectionEnd = null;
+    const mathSymbolGroups = [
+        {
+            title: '١. ژمارەکان، کردارە سەرەکییەکان و جەبر (Essential Algebra)',
+            badge: 'زۆرترین بەکارهاتوو',
+            priority: true,
+            rows: [
+                [
+                    { char: '1', latex: '1', num: true }, { char: '2', latex: '2', num: true }, { char: '3', latex: '3', num: true },
+                    { char: '4', latex: '4', num: true }, { char: '5', latex: '5', num: true }, { char: '6', latex: '6', num: true },
+                    { char: '7', latex: '7', num: true }, { char: '8', latex: '8', num: true }, { char: '9', latex: '9', num: true },
+                    { char: '0', latex: '0', num: true }, { char: '.', latex: '.', num: true }, { char: ',', latex: ',', num: true }
+                ],
+                [
+                    { char: '+', latex: '+' }, { char: '−', latex: '-' }, { char: '×', latex: '\\times' }, { char: '÷', latex: '\\div' },
+                    { char: '·', latex: '\\cdot' }, { char: '=', latex: '=' }, { char: '≠', latex: '\\ne' }, { char: '±', latex: '\\pm' },
+                    { char: '<', latex: '<' }, { char: '>', latex: '>' }, { char: '≤', latex: '\\le' }, { char: '≥', latex: '\\ge' }
+                ],
+                [
+                    { char: '⬚⁄⬚', sub: 'کەرت', latex: '\\frac{#?}{#?}' },
+                    { char: '√⬚', sub: 'ڕەگ', latex: '\\sqrt{#?}' },
+                    { char: 'ⁿ√⬚', sub: 'پلەی n', latex: '\\sqrt[#?]{#?}' },
+                    { char: 'x²', sub: 'دووجا', latex: '{#?}^{2}' },
+                    { char: 'xʸ', sub: 'توان', latex: '{#?}^{#?}' },
+                    { char: 'xₙ', sub: 'ژێرنووس', latex: '{#?}_{#?}' },
+                    { char: '(', latex: '(' }, { char: ')', latex: ')' },
+                    { char: '[', latex: '[' }, { char: ']', latex: ']' },
+                    { char: '|x|', latex: '\\left|#?\\right|' }, { char: '≈', latex: '\\approx' }
+                ]
+            ]
+        },
+        {
+            title: '٢. سێگۆشەزانی، نەخشەکان و فیزیا (Functions & Physics Core)',
+            rows: [
+                [
+                    { char: 'sin', latex: '\\sin(#?)' }, { char: 'cos', latex: '\\cos(#?)' }, { char: 'tan', latex: '\\tan(#?)' },
+                    { char: 'cot', latex: '\\cot(#?)' }, { char: 'sin⁻¹', latex: '\\arcsin(#?)' }, { char: 'cos⁻¹', latex: '\\arccos(#?)' },
+                    { char: 'tan⁻¹', latex: '\\arctan(#?)' }, { char: 'ln', latex: '\\ln(#?)' }, { char: 'log', latex: '\\log(#?)' },
+                    { char: 'eˣ', latex: 'e^{#?}' }, { char: 'π', latex: '\\pi' }, { char: 'θ', latex: '\\theta' }
+                ],
+                [
+                    { char: 'v⃗', sub: 'خێرایی', latex: '\\vec{v}' }, { char: 'a⃗', sub: 'تاو', latex: '\\vec{a}' },
+                    { char: 'F⃗', sub: 'هێز', latex: '\\vec{F}' }, { char: 'p⃗', sub: 'تەوژم', latex: '\\vec{p}' },
+                    { char: 'E⃗', sub: 'بواری کارەبا', latex: '\\vec{E}' }, { char: 'B⃗', sub: 'بواری موگناتیس', latex: '\\vec{B}' },
+                    { char: 'r⃗', sub: 'شوێن', latex: '\\vec{r}' }, { char: 'Δt', latex: '\\Delta t' },
+                    { char: 'λ', latex: '\\lambda' }, { char: 'ω', latex: '\\omega' },
+                    { char: 'c', sub: 'ڕووناکی', latex: 'c' }, { char: 'g', sub: 'کێشکردن', latex: 'g' }
+                ]
+            ]
+        },
+        {
+            title: '٣. کالکولەس، داتاشراو، تەواوکاری و سنوورەکان (Calculus)',
+            rows: [
+                [
+                    { char: 'd/dx', sub: 'داتاشراو', latex: '\\frac{d}{dx}' },
+                    { char: '∂/∂x', sub: 'بەشی', latex: '\\frac{\\partial}{\\partial x}' },
+                    { char: 'f ′', latex: '{#?}^{\\prime}' },
+                    { char: '∫', sub: 'تەواوکاری', latex: '\\int' },
+                    { char: '∫ₐᵇ', sub: 'دیاریکراو', latex: '\\int_{#?}^{#?}' },
+                    { char: '∬', latex: '\\iint' }, { char: '∭', latex: '\\iiint' }, { char: '∮', latex: '\\oint' },
+                    { char: '∑', sub: 'کۆکردنەوە', latex: '\\sum_{#?}^{#?}' },
+                    { char: '∏', sub: 'لێکدان', latex: '\\prod_{#?}^{#?}' },
+                    { char: 'lim', sub: 'سنوور', latex: '\\lim_{#?\\to#?}' },
+                    { char: '∞', latex: '\\infty' }
+                ],
+                [
+                    { char: '∇', latex: '\\nabla' }, { char: '∇²', latex: '\\nabla^2' }, { char: '∂', latex: '\\partial' }, { char: '→', latex: '\\to' },
+                    { char: 'dx', latex: 'dx' }, { char: 'dy', latex: 'dy' }, { char: 'dt', latex: 'dt' },
+                    { char: 'î', latex: '\\hat{\\imath}' }, { char: 'ĵ', latex: '\\hat{\\jmath}' }, { char: 'k̂', latex: '\\hat{k}' },
+                    { char: 'n̂', latex: '\\hat{n}' }, { char: '!', latex: '!' }
+                ]
+            ]
+        },
+        {
+            title: '٤. لۆژیک، کۆمەڵەکان و ماتریکس (Logic, Sets & Matrices)',
+            rows: [
+                [
+                    { char: '∀', latex: '\\forall' }, { char: '∃', latex: '\\exists' }, { char: '∈', latex: '\\in' }, { char: '∉', latex: '\\notin' },
+                    { char: '⊂', latex: '\\subset' }, { char: '⊆', latex: '\\subseteq' }, { char: '∪', latex: '\\cup' }, { char: '∩', latex: '\\cap' },
+                    { char: '∅', latex: '\\emptyset' }, { char: '∧', latex: '\\land' }, { char: '∨', latex: '\\lor' }, { char: '¬', latex: '\\neg' }
+                ],
+                [
+                    { char: '⟹', latex: '\\implies' }, { char: '⟺', latex: '\\iff' }, { char: 'ℝ', latex: '\\mathbb{R}' }, { char: 'ℕ', latex: '\\mathbb{N}' },
+                    { char: 'ℤ', latex: '\\mathbb{Z}' }, { char: 'ℂ', latex: '\\mathbb{C}' },
+                    { char: '[2×2]', sub: 'ماتریکس', latex: '\\begin{pmatrix} #? & #? \\\\ #? & #? \\end{pmatrix}' },
+                    { char: '[3×3]', sub: 'ماتریکس', latex: '\\begin{bmatrix} #? & #? & #? \\\\ #? & #? & #? \\\\ #? & #? & #? \\end{bmatrix}' },
+                    { char: 'det', latex: '\\det(#?)' }, { char: 'Aᵀ', latex: '{#?}^{T}' }, { char: 'A⁻¹', latex: '{#?}^{-1}' }, { char: '∝', latex: '\\propto' }
+                ]
+            ]
+        },
+        {
+            title: '٥. پیتە یۆنانییەکان و نەگۆڕە فیزیاییەکان (Greek Letters & Physical Constants)',
+            rows: [
+                [
+                    { char: 'α', latex: '\\alpha' }, { char: 'β', latex: '\\beta' }, { char: 'γ', latex: '\\gamma' }, { char: 'δ', latex: '\\delta' },
+                    { char: 'ε', latex: '\\epsilon' }, { char: 'ζ', latex: '\\zeta' }, { char: 'η', latex: '\\eta' }, { char: 'θ', latex: '\\theta' },
+                    { char: 'κ', latex: '\\kappa' }, { char: 'λ', latex: '\\lambda' }, { char: 'μ', latex: '\\mu' }, { char: 'ν', latex: '\\nu' },
+                    { char: 'ξ', latex: '\\xi' }, { char: 'ρ', latex: '\\rho' }
+                ],
+                [
+                    { char: 'σ', latex: '\\sigma' }, { char: 'τ', latex: '\\tau' }, { char: 'ϕ', latex: '\\phi' }, { char: 'χ', latex: '\\chi' },
+                    { char: 'ψ', latex: '\\psi' }, { char: 'ω', latex: '\\omega' }, { char: 'Δ', latex: '\\Delta' }, { char: 'Θ', latex: '\\Theta' },
+                    { char: 'Λ', latex: '\\Lambda' }, { char: 'Σ', latex: '\\Sigma' }, { char: 'Φ', latex: '\\Phi' }, { char: 'Ψ', latex: '\\Psi' },
+                    { char: 'Ω', latex: '\\Omega' }, { char: 'Γ', latex: '\\Gamma' }
+                ],
+                [
+                    { char: 'h', sub: 'پلانک', latex: 'h' }, { char: 'ℏ', sub: 'h / 2π', latex: '\\hbar' },
+                    { char: 'G', sub: 'کێشکردن', latex: 'G' }, { char: 'k_B', sub: 'بۆڵتزمان', latex: 'k_B' },
+                    { char: 'e', sub: 'بارگەی e', latex: 'q_e' }, { char: 'ε₀', sub: 'پەرماتیڤیتی', latex: '\\varepsilon_0' },
+                    { char: 'μ₀', sub: 'پێرمەبیلیتی', latex: '\\mu_0' }, { char: 'N_A', sub: 'ئەڤۆگادرۆ', latex: 'N_A' },
+                    { char: 'R', sub: 'گازی گشتی', latex: 'R' }, { char: 'σ_SB', sub: 'ستێفان', latex: '\\sigma_{SB}' },
+                    { char: 'Φ_B', sub: 'لێشاوی موگناتیس', latex: '\\Phi_B' }, { char: 'Φ_E', sub: 'لێشاوی کارەبا', latex: '\\Phi_E' }
+                ]
+            ]
+        }
+    ];
     const questionFontSizes = {};
     const questionBold = {};
 
@@ -1213,13 +1779,14 @@
     }
 
     function applyQuestionFontSettings(blockId) {
-        const block = document.getElementById(blockId);
+        const resolvedId = String(blockId).startsWith('block-') ? String(blockId) : `block-${blockId}`;
+        const block = document.getElementById(resolvedId);
         if (!block) return;
-        const size = questionFontSizes[blockId] || 16;
-        const bold = questionBold[blockId] || false;
-        const display = document.querySelector(`#size-display-${blockId}`);
+        const size = questionFontSizes[resolvedId] || 16;
+        const bold = questionBold[resolvedId] || false;
+        const display = document.querySelector(`#size-display-${resolvedId}`);
         if (display) display.textContent = size;
-        const allText = block.querySelectorAll('.question-title-input, .option-item input, .matching-row input, .sub-num, .q-number-label, .writing-textarea, .difference-item textarea, .handwriting-text, .handwriting-line');
+        const allText = block.querySelectorAll('.question-title-input, .option-item input, .matching-row input, .sub-num, .q-number-label, .writing-editor, .writing-textarea, .difference-item textarea, .handwriting-text, .handwriting-line, .simple-answer-line, .rich-input-clone, math-field.inline-math-field');
         allText.forEach(el => {
             el.style.fontSize = size + 'px';
             el.style.fontWeight = bold ? 'bold' : 'normal';
@@ -1228,6 +1795,168 @@
         inputs.forEach(el => {
             el.style.fontSize = size + 'px';
             el.style.fontWeight = bold ? 'bold' : 'normal';
+        });
+    }
+
+    function rememberWritingSelection(blockId) {
+        const editor = document.getElementById(`writing-editor-${blockId}`);
+        const selection = window.getSelection();
+        if (!editor || !selection || !selection.rangeCount) return;
+        const range = selection.getRangeAt(0);
+        if (editor.contains(range.commonAncestorContainer)) writingSelections[blockId] = range.cloneRange();
+    }
+
+    function selectWritingImage(blockId, img) {
+        const editor = document.getElementById(`writing-editor-${blockId}`);
+        if (!editor || !img) return;
+        editor.querySelectorAll('.writing-inline-image.is-selected').forEach((image) => image.classList.remove('is-selected'));
+        img.classList.add('is-selected');
+        selectedWritingImages[blockId] = img;
+        const tools = document.getElementById(`writing-image-tools-${blockId}`);
+        if (tools) tools.classList.add('show');
+        imageSizes[blockId] = Number(img.dataset.size) || 40;
+        imageAlignments[blockId] = img.dataset.align === 'right' ? 'right' : 'left';
+        const slider = document.getElementById(`img-slider-${blockId}`);
+        if (slider) slider.value = imageSizes[blockId];
+        const label = document.getElementById(`img-size-label-${blockId}`);
+        if (label) label.textContent = Math.round(imageSizes[blockId]) + '%';
+        document.querySelectorAll(`#writing-image-tools-${blockId} [data-image-align]`).forEach((button) => {
+            button.classList.toggle('active', button.dataset.imageAlign === imageAlignments[blockId]);
+        });
+    }
+
+    function restoreWritingEditor(blockId, savedHtml) {
+        const editor = document.getElementById(`writing-editor-${blockId}`);
+        if (!editor) return;
+        const parsed = new DOMParser().parseFromString(savedHtml, 'text/html');
+
+        function appendSafeNode(sourceNode, target) {
+            if (sourceNode.nodeType === Node.TEXT_NODE) {
+                target.appendChild(document.createTextNode(sourceNode.nodeValue || ''));
+                return;
+            }
+            if (sourceNode.nodeType !== Node.ELEMENT_NODE) return;
+            if (sourceNode.tagName === 'BR') {
+                target.appendChild(document.createElement('br'));
+                return;
+            }
+            if (sourceNode.tagName === 'MATH-FIELD') {
+                const mf = createInlineMathField(sourceNode.textContent || sourceNode.getAttribute('value') || '', target);
+                target.appendChild(mf);
+                return;
+            }
+            if (sourceNode.tagName === 'IMG' && sourceNode.classList.contains('writing-inline-image')) {
+                const src = sourceNode.getAttribute('src') || '';
+                if (!src.startsWith('data:image/')) return;
+                const image = document.createElement('img');
+                const size = Math.max(20, Math.min(100, Number(sourceNode.dataset.size) || 40));
+                const alignment = sourceNode.dataset.align === 'right' ? 'right' : 'left';
+                image.className = 'writing-inline-image';
+                image.alt = 'وێنەی پرسیاری ئازاد';
+                image.contentEditable = 'false';
+                image.draggable = false;
+                image.src = src;
+                image.dataset.size = String(size);
+                image.dataset.align = alignment;
+                image.style.width = `${size}%`;
+                image.addEventListener('click', () => selectWritingImage(blockId, image));
+                target.appendChild(image);
+                return;
+            }
+            if (['DIV', 'P', 'SPAN'].includes(sourceNode.tagName)) {
+                Array.from(sourceNode.childNodes).forEach((child) => appendSafeNode(child, target));
+                if (['DIV', 'P'].includes(sourceNode.tagName) && sourceNode.nextSibling && target.lastChild?.nodeName !== 'BR') {
+                    target.appendChild(document.createElement('br'));
+                }
+            }
+        }
+
+        editor.replaceChildren();
+        Array.from(parsed.body.childNodes).forEach((child) => appendSafeNode(child, editor));
+    }
+
+    function insertWritingImage(event, blockId) {
+        const input = event.target;
+        if (!input.files || !input.files[0]) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const editor = document.getElementById(`writing-editor-${blockId}`);
+            if (!editor) return;
+            const img = document.createElement('img');
+            img.className = 'writing-inline-image';
+            img.alt = 'وێنەی پرسیاری ئازاد';
+            img.contentEditable = 'false';
+            img.draggable = false;
+            img.dataset.size = '40';
+            img.dataset.align = 'left';
+            img.style.width = '40%';
+            img.src = e.target.result;
+            img.addEventListener('click', () => selectWritingImage(blockId, img));
+
+            const selection = window.getSelection();
+            editor.insertBefore(img, editor.firstChild);
+            const range = document.createRange();
+            range.setStartAfter(img);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            writingSelections[blockId] = range.cloneRange();
+            editor.focus();
+            selectWritingImage(blockId, img);
+        };
+        reader.readAsDataURL(input.files[0]);
+        input.value = '';
+    }
+
+    function handleWritingEnter(event, blockId) {
+        if (event.key !== 'Enter') return;
+        event.preventDefault();
+        const editor = document.getElementById(`writing-editor-${blockId}`);
+        const selection = window.getSelection();
+        if (!editor || !selection) return;
+        const currentRange = selection.rangeCount ? selection.getRangeAt(0) : null;
+        const range = currentRange && editor.contains(currentRange.commonAncestorContainer)
+            ? currentRange.cloneRange()
+            : (writingSelections[blockId] || document.createRange());
+        if (!currentRange || !editor.contains(currentRange.commonAncestorContainer)) {
+            range.selectNodeContents(editor);
+            range.collapse(false);
+        }
+        range.deleteContents();
+        const lineBreak = document.createElement('br');
+        range.insertNode(lineBreak);
+        range.setStartAfter(lineBreak);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        writingSelections[blockId] = range.cloneRange();
+    }
+
+    function setWritingImageSize(blockId, value) {
+        const img = selectedWritingImages[blockId];
+        if (!img) return;
+        const size = Math.max(20, Math.min(100, Number(value) || 40));
+        imageSizes[blockId] = size;
+        img.dataset.size = String(size);
+        img.style.width = `${size}%`;
+        const slider = document.getElementById(`img-slider-${blockId}`);
+        if (slider) slider.value = size;
+        const label = document.getElementById(`img-size-label-${blockId}`);
+        if (label) label.textContent = `${size}%`;
+    }
+
+    function changeWritingImageSize(blockId, delta) {
+        setWritingImageSize(blockId, (imageSizes[blockId] || 40) + delta);
+    }
+
+    function alignWritingImage(blockId, alignment) {
+        const img = selectedWritingImages[blockId];
+        if (!img) return;
+        const imageAlignment = alignment === 'right' ? 'right' : 'left';
+        imageAlignments[blockId] = imageAlignment;
+        img.dataset.align = imageAlignment;
+        document.querySelectorAll(`#writing-image-tools-${blockId} [data-image-align]`).forEach((button) => {
+            button.classList.toggle('active', button.dataset.imageAlign === imageAlignment);
         });
     }
 
@@ -1254,6 +1983,18 @@
         if (label) label.textContent = Math.round(imageSizes[blockId]) + '%';
     }
 
+    function changeMcqImageSize(blockId, delta) {
+        const img = document.getElementById(`img-preview-${blockId}`);
+        if (!img) return;
+        const sizeKey = `block-${blockId}`;
+        const size = Math.max(0.5, Math.min(2, Math.round(((imageSizes[sizeKey] || 1) + delta) * 100) / 100));
+        imageSizes[sizeKey] = size;
+        img.style.width = `${size}in`;
+        img.style.height = 'auto';
+        const label = document.getElementById(`img-size-label-${blockId}`);
+        if (label) label.textContent = `${size} in`;
+    }
+
     function addHandwritingLine(containerId) {
         const container = document.getElementById(containerId);
         if (container) {
@@ -1266,6 +2007,11 @@
     }
 
     function collectAllData() {
+        document.querySelectorAll('.rich-input-clone').forEach((clone) => syncRichCloneToHiddenInput(clone));
+        document.querySelectorAll('math-field.inline-math-field').forEach((mf) => {
+            mf.textContent = mf.value || '';
+            mf.setAttribute('value', mf.value || '');
+        });
         const globalFont = document.getElementById('globalFontSelect').value;
         const language = currentLang;
         const allInputs = document.querySelectorAll('input[type="text"]');
@@ -1292,18 +2038,23 @@
             const isBold = questionBold[blockId] || false;
             const allBlockInputs = block.querySelectorAll('input[type="text"]');
             const inputsData = {};
+            const textInputsData = [];
             allBlockInputs.forEach((input) => {
                 const key = input.id || input.placeholder || 'unknown';
                 inputsData[key] = input.value;
+                textInputsData.push(input.value);
             });
+            const textareasData = Array.from(block.querySelectorAll('textarea'), (textarea) => textarea.value);
             const textarea = block.querySelector('.writing-textarea');
-            let writingText = textarea ? textarea.value : '';
+            const writingEditor = block.querySelector('.writing-editor');
+            let writingText = writingEditor ? writingEditor.textContent : (textarea ? textarea.value : '');
+            const writingHtml = writingEditor ? writingEditor.innerHTML : null;
             const handwritingText = block.querySelector('.handwriting-text');
             let handwritingTextValue = handwritingText ? handwritingText.value : '';
             const handwritingLines = block.querySelectorAll('.handwriting-line');
             const handwritingLinesData = [];
             handwritingLines.forEach((line) => handwritingLinesData.push(line.value));
-            const imgPreview = block.querySelector('.uploaded-img');
+            const imgPreview = blockType === 'multiple-choice' ? null : block.querySelector('.uploaded-img');
             let imageData = null;
             let imageSize = 100;
             if (imgPreview && imgPreview.src && imgPreview.style.display !== 'none') {
@@ -1325,10 +2076,14 @@
                 const optionsContainer = item.querySelector('.options-container');
                 let layout = 'options-1-row';
                 if (optionsContainer && optionsContainer.classList.contains('options-2-row')) layout = 'options-2-row';
+                const mcqImage = item.querySelector('.mcq-image-preview');
+                const imageKey = mcqImage ? mcqImage.id.replace('img-preview-', '') : null;
                 mcqData.push({
                     question: questionInput ? questionInput.value : '',
                     options: options,
-                    layout: layout
+                    layout: layout,
+                    imageData: mcqImage && mcqImage.src && mcqImage.style.display !== 'none' ? mcqImage.src : null,
+                    imageSize: imageKey ? (imageSizes[`block-${imageKey}`] || 1) : 1
                 });
             });
             const subList = block.querySelector('[id^="sub-list-"]');
@@ -1379,11 +2134,15 @@
                 fontSize: fontSize,
                 isBold: isBold,
                 allInputs: inputsData,
+                textInputs: textInputsData,
+                textareas: textareasData,
                 writingText: writingText,
+                writingHtml: writingHtml,
                 handwritingText: handwritingTextValue,
                 handwritingLines: handwritingLinesData,
                 imageData: imageData,
                 imageSize: imageSize,
+                imageAlignment: blockType === 'writing' ? (imageAlignments[blockId] || 'right') : null,
                 diffData: diffData,
                 mcqItems: mcqData,
                 subItems: subItems,
@@ -1402,44 +2161,146 @@
     }
 
     function saveAndDownload() {
-        const data = collectAllData();
-        const jsonStr = JSON.stringify(data, null, 2);
-        const blob = new Blob([jsonStr], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `پرسیارەکان_${new Date().toISOString().slice(0,10)}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
         const btn = document.querySelector('.btn-save-main');
-        if (btn) {
-            const originalText = btn.textContent;
-            btn.textContent = '✅';
-            setTimeout(() => { btn.textContent = originalText; }, 1500);
+        let url;
+        let link;
+        try {
+            const data = collectAllData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+            url = URL.createObjectURL(blob);
+            link = document.createElement('a');
+            link.href = url;
+            link.download = `پرسیارەکان_${new Date().toISOString().slice(0, 10)}.json`;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            btn?.classList.add('save-success');
+            if (btn) window.setTimeout(() => btn.classList.remove('save-success'), 1500);
+            showFileStatus(getFileMessage('saveSuccess'));
+        } catch (error) {
+            console.error('Failed to save exam data:', error);
+            showFileStatus(`${getFileMessage('saveError')} ${error.message || error}`, true);
+        } finally {
+            link?.remove();
+            if (url) window.setTimeout(() => URL.revokeObjectURL(url), 1000);
         }
     }
 
+    let fileStatusTimer;
+
+    function getFileMessage(message) {
+        const messages = {
+            saveSuccess: { ku: 'فایلەکە بە سەرکەوتوویی پاشەکەوت کرا.', ar: 'تم حفظ الملف بنجاح.', en: 'File saved successfully.' },
+            saveError: { ku: 'پاشەکەوتکردن سەرکەوتوو نەبوو:', ar: 'تعذر حفظ الملف:', en: 'Could not save the file:' },
+            loadSuccess: { ku: 'فایلەکە بە سەرکەوتوویی هێنرایەوە.', ar: 'تم تحميل الملف بنجاح.', en: 'File loaded successfully.' },
+            loadError: { ku: 'هێنانەوەی فایل سەرکەوتوو نەبوو:', ar: 'تعذر تحميل الملف:', en: 'Could not load the file:' },
+            invalidFile: { ku: 'فایلەکە بەرواری دروستی پاشەکەوتی تاقیکردنەوە نییە.', ar: 'الملف ليس ملف حفظ صالحًا.', en: 'This is not a valid exam save file.' }
+        };
+        return messages[message][currentLang] || messages[message].ku;
+    }
+
+    function showFileStatus(message, isError = false) {
+        const status = document.getElementById('fileStatus');
+        if (!status) return;
+        status.textContent = message;
+        status.classList.toggle('error', isError);
+        window.clearTimeout(fileStatusTimer);
+        fileStatusTimer = window.setTimeout(() => {
+            status.textContent = '';
+            status.classList.remove('error');
+        }, 5000);
+    }
+
     function loadFromFile() {
-        document.getElementById('fileInput').click();
+        const input = document.getElementById('fileInput');
+        if (!input) {
+            showFileStatus(getFileMessage('loadError'), true);
+            return;
+        }
+        input.click();
     }
 
     function loadFile(event) {
-        const file = event.target.files[0];
+        const input = event.target;
+        const file = input.files && input.files[0];
         if (!file) return;
+        if (file.size === 0) {
+            showFileStatus(getFileMessage('invalidFile'), true);
+            input.value = '';
+            return;
+        }
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function() {
+            let previousData;
+            let isApplying = false;
             try {
-                const data = JSON.parse(e.target.result);
+                if (typeof reader.result !== 'string') throw new Error(getFileMessage('invalidFile'));
+                const data = JSON.parse(reader.result);
+                validateSaveData(data);
+                previousData = collectAllData();
+                isApplying = true;
                 applyLoadedData(data);
-                alert('✅ داتا هێنرایەوە!');
-            } catch(err) {
-                alert('⚠️ فایلەکە ناڕاستە: ' + err.message);
+                isApplying = false;
+                showFileStatus(getFileMessage('loadSuccess'));
+            } catch (error) {
+                if (isApplying && previousData) {
+                    try {
+                        applyLoadedData(previousData);
+                    } catch (restoreError) {
+                        console.error('Failed to restore exam data after an import error:', restoreError);
+                        error.message = `${error.message || error}; ${getFileMessage('loadError')} ${restoreError.message || restoreError}`;
+                    }
+                }
+                console.error('Failed to load exam data:', error);
+                showFileStatus(`${getFileMessage('loadError')} ${error.message || error}`, true);
             }
+            input.value = '';
+        };
+        reader.onerror = function() {
+            console.error('Failed to read selected exam file:', reader.error);
+            showFileStatus(`${getFileMessage('loadError')} ${reader.error?.message || ''}`, true);
+            input.value = '';
+        };
+        reader.onabort = function() {
+            showFileStatus(getFileMessage('loadError'), true);
+            input.value = '';
         };
         reader.readAsText(file);
-        event.target.value = '';
+    }
+
+    function validateSaveData(data) {
+        const allowedFonts = ['font-moe', 'font-noto', 'font-rudaw', 'font-speda', 'font-nrt', 'font-ava', 'font-korsat', 'font-ibm', 'font-vazir', 'font-amiri', 'font-changa', 'font-tajawal', 'font-cairo', 'font-messiri', 'font-kufam', 'font-readex'];
+        const allowedLanguages = ['ku', 'ar', 'en'];
+        const allowedTypes = ['multiple-choice', 'true-false', 'blank', 'matching', 'definition', 'image-question', 'difference', 'reasons', 'counting', 'concept-map', 'writing', 'darashtin', 'imla', 'khoshnusi'];
+        if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error(getFileMessage('invalidFile'));
+        if (data.globalFont !== undefined && !allowedFonts.includes(data.globalFont)) throw new Error(getFileMessage('invalidFile'));
+        if (data.language !== undefined && !allowedLanguages.includes(data.language)) throw new Error(getFileMessage('invalidFile'));
+        if (data.headerData !== undefined && (!data.headerData || typeof data.headerData !== 'object' || Array.isArray(data.headerData))) throw new Error(getFileMessage('invalidFile'));
+        if (data.blocks !== undefined && !Array.isArray(data.blocks)) throw new Error(getFileMessage('invalidFile'));
+        (data.blocks || []).forEach((block) => {
+            if (!block || typeof block !== 'object' || Array.isArray(block)) throw new Error(getFileMessage('invalidFile'));
+            if (block.blockType !== undefined && !allowedTypes.includes(block.blockType)) throw new Error(getFileMessage('invalidFile'));
+            ['textInputs', 'textareas', 'handwritingLines', 'diffData', 'mcqItems', 'subItems', 'countingItems'].forEach((key) => {
+                if (block[key] !== undefined && !Array.isArray(block[key])) throw new Error(getFileMessage('invalidFile'));
+            });
+            if (block.allInputs !== undefined && (!block.allInputs || typeof block.allInputs !== 'object' || Array.isArray(block.allInputs))) throw new Error(getFileMessage('invalidFile'));
+            if (block.imageData !== undefined && block.imageData !== null && typeof block.imageData !== 'string') throw new Error(getFileMessage('invalidFile'));
+            if (block.writingHtml !== undefined && block.writingHtml !== null && typeof block.writingHtml !== 'string') throw new Error(getFileMessage('invalidFile'));
+            if (block.imageAlignment !== undefined && block.imageAlignment !== null && !['left', 'right'].includes(block.imageAlignment)) throw new Error(getFileMessage('invalidFile'));
+            if (block.matchingData !== undefined && (!block.matchingData || typeof block.matchingData !== 'object' || Array.isArray(block.matchingData))) throw new Error(getFileMessage('invalidFile'));
+            if (block.mcqItems) block.mcqItems.forEach((item) => {
+                if (!item || typeof item !== 'object' || Array.isArray(item) || (item.options !== undefined && !Array.isArray(item.options))) throw new Error(getFileMessage('invalidFile'));
+                if (item.imageData !== undefined && item.imageData !== null && typeof item.imageData !== 'string') throw new Error(getFileMessage('invalidFile'));
+                if (item.imageSize !== undefined && (!Number.isFinite(item.imageSize) || item.imageSize < 0.5 || item.imageSize > 2)) throw new Error(getFileMessage('invalidFile'));
+            });
+            if (block.subItems) block.subItems.forEach((item) => {
+                if (!Array.isArray(item)) throw new Error(getFileMessage('invalidFile'));
+            });
+            if (block.matchingData && ['colA', 'colB'].some((key) => block.matchingData[key] !== undefined && !Array.isArray(block.matchingData[key]))) throw new Error(getFileMessage('invalidFile'));
+            if (block.countingItems) block.countingItems.forEach((item) => {
+                if (!item || typeof item !== 'object' || Array.isArray(item) || (item.sub !== undefined && !Array.isArray(item.sub))) throw new Error(getFileMessage('invalidFile'));
+            });
+        });
     }
 
     function applyLoadedData(data) {
@@ -1465,27 +2326,31 @@
                 const currentBlock = blocks[blocks.length - 1];
                 if (!currentBlock) return;
                 const blockId = currentBlock.id;
+                const repeatableTypes = ['true-false', 'blank', 'definition', 'image-question', 'reasons', 'darashtin', 'imla'];
+                if (type === 'multiple-choice') {
+                    while (currentBlock.querySelectorAll('.mcq-item-box').length < (blockData.mcqItems || []).length) addMCQQuestionItem(blockCount);
+                } else if (type === 'matching') {
+                    const matchingData = blockData.matchingData || {};
+                    const matchingRows = Math.max((matchingData.colA || []).length, (matchingData.colB || []).length);
+                    while (currentBlock.querySelectorAll('.matching-column')[0]?.querySelectorAll('.matching-row').length < matchingRows) addMatchingRow(blockCount);
+                } else if (type === 'difference') {
+                    while (currentBlock.querySelectorAll('.difference-item').length < (blockData.diffData || []).length) addDiffItem(blockCount);
+                } else if (type === 'counting') {
+                    while (currentBlock.querySelectorAll('[id^="counting-item-"]').length < (blockData.countingItems || []).length) addCountingMainItem(blockCount);
+                } else if (repeatableTypes.includes(type)) {
+                    const subListEl = currentBlock.querySelector('[id^="sub-list-"]');
+                    while (subListEl && subListEl.children.length < (blockData.subItems || []).length) addSubItem(blockCount, type);
+                }
                 if (blockData.fontSize) questionFontSizes[blockId] = blockData.fontSize;
                 if (blockData.isBold !== undefined) questionBold[blockId] = blockData.isBold;
-                const fontSelector = currentBlock.querySelector('.font-selector');
-                if (fontSelector && blockData.blockFont) {
-                    fontSelector.value = blockData.blockFont;
-                    changeBlockFont(fontSelector);
-                }
-                const titleInput = currentBlock.querySelector('.question-title-input');
-                if (titleInput && blockData.title !== undefined) titleInput.value = blockData.title;
-                const scoreInput = currentBlock.querySelector('.score-input');
-                if (scoreInput && blockData.score !== undefined) scoreInput.value = blockData.score;
-                if (blockData.hasPageBreak) {
-                    const btn = currentBlock.querySelector('.btn-page-break');
-                    currentBlock.classList.add('has-page-break');
-                    if (btn) {
-                        btn.classList.add('active');
-                        btn.textContent = blockData.pageBreakText || '✅ لەسەر لاپەڕەیەکی نوێیە';
-                    }
-                }
+                const writingEditor = currentBlock.querySelector('.writing-editor');
                 const textarea = currentBlock.querySelector('.writing-textarea');
-                if (textarea && blockData.writingText !== undefined) textarea.value = blockData.writingText;
+                if (writingEditor) {
+                    if (typeof blockData.writingHtml === 'string') restoreWritingEditor(blockCount, blockData.writingHtml);
+                    else if (blockData.writingText !== undefined) writingEditor.textContent = blockData.writingText;
+                } else if (textarea && blockData.writingText !== undefined) {
+                    textarea.value = blockData.writingText;
+                }
                 
                 const hwText = currentBlock.querySelector('.handwriting-text');
                 if (hwText && blockData.handwritingText !== undefined) hwText.value = blockData.handwritingText;
@@ -1508,18 +2373,37 @@
                     const text = currentBlock.querySelector('[id^="img-text-"]');
                     const controls = currentBlock.querySelector('.image-controls');
                     if (img) {
+                        if (img.classList.contains('writing-image-preview')) {
+                            img.onload = () => updateWritingImageLayout(blockId);
+                        }
                         img.src = blockData.imageData;
                         img.style.display = 'block';
                         if (text) text.style.display = 'none';
                         if (controls) controls.classList.add('show');
-                        const size = blockData.imageSize || 100;
-                        imageSizes[blockId] = size;
-                        img.style.width = size + '%';
+                        const isMcqImage = img.classList.contains('mcq-image-preview');
+                        const size = blockData.imageSize || (isMcqImage ? 1 : 100);
+                        if (isMcqImage) {
+                            const mcqSize = Math.max(0.5, Math.min(2, Number(size) || 1));
+                            imageSizes[currentBlock.id] = mcqSize;
+                            img.style.width = `${mcqSize}in`;
+                            const label = currentBlock.querySelector('.image-size-label');
+                            if (label) label.textContent = `${mcqSize} in`;
+                        } else {
+                            const imageSize = currentBlock.dataset.type === 'writing'
+                                ? Math.max(20, Math.min(100, Number(size) || 100))
+                                : size;
+                            imageSizes[blockId] = imageSize;
+                            img.style.width = imageSize + '%';
+                            const label = currentBlock.querySelector('.image-size-label');
+                            if (label) label.textContent = Math.round(imageSize) + '%';
+                        }
                         img.style.height = 'auto';
-                        const label = document.querySelector(`#img-size-label-${blockId}`);
-                        if (label) label.textContent = Math.round(size) + '%';
-                        const slider = document.querySelector(`#img-slider-${blockId}`);
-                        if (slider) slider.value = size;
+                        if (currentBlock.dataset.type === 'writing') {
+                            alignWritingImage(blockId, blockData.imageAlignment || 'right');
+                            updateWritingImageLayout(blockId);
+                        }
+                        const slider = currentBlock.querySelector('.image-size-slider');
+                        if (slider) slider.value = imageSizes[blockId] || size;
                     }
                 }
                 if (blockData.diffData && blockData.diffData.length > 0) {
@@ -1543,10 +2427,26 @@
                             if (qInput && mcq.question !== undefined) qInput.value = mcq.question;
                             const optInputs = box.querySelectorAll('.option-item input');
                             optInputs.forEach((opt, oi) => {
-                                if (oi < mcq.options.length && mcq.options[oi] !== undefined) opt.value = mcq.options[oi];
+                                if (oi < (mcq.options || []).length && mcq.options[oi] !== undefined) opt.value = mcq.options[oi];
                             });
                             const container = box.querySelector('.options-container');
                             if (container && mcq.layout) container.className = `options-container ${mcq.layout}`;
+                            const mcqImage = box.querySelector('.mcq-image-preview');
+                            const imageData = mcq.imageData || (idx === 0 ? blockData.imageData : null);
+                            if (mcqImage && imageData) {
+                                mcqImage.src = imageData;
+                                mcqImage.style.display = 'block';
+                                const controls = box.querySelector('.image-controls');
+                                if (controls) controls.classList.add('show');
+                                const savedSize = mcq.imageSize !== undefined ? mcq.imageSize : (idx === 0 ? blockData.imageSize : 1);
+                                const imageSize = Math.max(0.5, Math.min(2, Number(savedSize) || 1));
+                                const imageKey = mcqImage.id.replace('img-preview-', '');
+                                imageSizes[`block-${imageKey}`] = imageSize;
+                                mcqImage.style.width = `${imageSize}in`;
+                                mcqImage.style.height = 'auto';
+                                const label = box.querySelector('.image-size-label');
+                                if (label) label.textContent = `${imageSize} in`;
+                            }
                         }
                     });
                 }
@@ -1591,14 +2491,47 @@
                             if (mainInput && item.main !== undefined) mainInput.value = item.main;
                             const subListEl = div.querySelector('[id^="counting-sub-list-"]');
                             if (subListEl && item.sub) {
-                                const subDivs = subListEl.querySelectorAll('div');
-                                subDivs.forEach((subDiv, si) => {
+                                while (subListEl.children.length < item.sub.length) {
+                                    const point = document.createElement('div');
+                                    point.style.fontSize = `${questionFontSizes[blockId] || 16}px`;
+                                    subListEl.appendChild(point);
+                                }
+                                Array.from(subListEl.children).forEach((subDiv, si) => {
                                     if (si < item.sub.length && item.sub[si] !== undefined) subDiv.textContent = item.sub[si];
                                 });
                             }
                         }
                     });
                 }
+                if (Array.isArray(blockData.textInputs)) {
+                    currentBlock.querySelectorAll('input[type="text"]').forEach((input, index) => {
+                        if (index < blockData.textInputs.length) input.value = blockData.textInputs[index];
+                    });
+                }
+                if (Array.isArray(blockData.textareas)) {
+                    currentBlock.querySelectorAll('textarea').forEach((textarea, index) => {
+                        if (index < blockData.textareas.length) textarea.value = blockData.textareas[index];
+                    });
+                }
+                currentBlock.querySelectorAll('input[type="text"], textarea').forEach((field) => {
+                    if (field.value && field.value.includes('$$')) {
+                        const raw = field.value;
+                        field.value = '';
+                        const clone = upgradeFieldToRichMath(field);
+                        clone.replaceChildren();
+                        const parts = raw.split(/(\$\$[\s\S]*?\$\$)/g);
+                        parts.forEach((part) => {
+                            if (part.startsWith('$$') && part.endsWith('$$') && part.length >= 4) {
+                                const latex = part.slice(2, -2);
+                                const mf = createInlineMathField(latex, clone);
+                                clone.appendChild(mf);
+                            } else if (part) {
+                                clone.appendChild(document.createTextNode(part));
+                            }
+                        });
+                        syncRichCloneToHiddenInput(clone);
+                    }
+                });
                 applyQuestionFontSettings(blockId);
             });
         }
@@ -1668,6 +2601,383 @@
         }
     }
 
+    function isMathEditable(target) {
+        if (!target) return false;
+        if (target.tagName === 'MATH-FIELD') return true;
+        return (target instanceof HTMLInputElement && target.type === 'text')
+            || (target instanceof HTMLTextAreaElement)
+            || (target instanceof HTMLElement && target.isContentEditable);
+    }
+
+    function syncRichCloneToHiddenInput(clone) {
+        if (!clone || !clone._linkedInput) return;
+        let serialized = '';
+        clone.childNodes.forEach((node) => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                serialized += node.nodeValue;
+            } else if (node.tagName === 'MATH-FIELD') {
+                serialized += '$$' + (node.value || '') + '$$';
+            } else if (node.tagName === 'BR') {
+                serialized += '\n';
+            } else if (node.textContent) {
+                serialized += node.textContent;
+            }
+        });
+        clone._linkedInput.value = serialized;
+    }
+
+    function upgradeFieldToRichMath(field) {
+        if (!field) return null;
+        if (field.tagName === 'MATH-FIELD' || field.isContentEditable) return field;
+        if (field._richClone && field._richClone.isConnected) return field._richClone;
+
+        const clone = document.createElement('div');
+        clone.className = ('rich-input-clone ' + (field.className || '')).trim();
+        clone.contentEditable = 'true';
+        clone.setAttribute('data-placeholder', field.getAttribute('placeholder') || '');
+        clone.style.cssText = field.style.cssText;
+        clone.style.display = 'inline-block';
+        if (field.tagName === 'TEXTAREA') {
+            clone.style.width = '100%';
+            clone.style.minHeight = field.offsetHeight ? field.offsetHeight + 'px' : '60px';
+            clone.style.whiteSpace = 'pre-wrap';
+        }
+
+        const startOffset = field.selectionStart ?? (field.value ? field.value.length : 0);
+        const endOffset = field.selectionEnd ?? startOffset;
+        const val = field.value || '';
+        const beforeText = val.slice(0, startOffset);
+        const afterText = val.slice(endOffset);
+
+        field.style.display = 'none';
+        field._richClone = clone;
+        clone._linkedInput = field;
+        field.parentNode.insertBefore(clone, field.nextSibling);
+
+        const beforeNode = document.createTextNode(beforeText);
+        const afterNode = document.createTextNode(afterText);
+        clone.appendChild(beforeNode);
+        clone.appendChild(afterNode);
+
+        clone.addEventListener('input', () => syncRichCloneToHiddenInput(clone));
+        clone.addEventListener('keyup', () => {
+            syncRichCloneToHiddenInput(clone);
+            rememberMathTarget();
+        });
+        clone.addEventListener('mouseup', () => rememberMathTarget());
+
+        const range = document.createRange();
+        range.setStart(beforeNode, beforeText.length);
+        range.collapse(true);
+        const sel = window.getSelection();
+        if (sel) {
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+        mathTarget = clone;
+        mathSelectionRange = range.cloneRange();
+        return clone;
+    }
+
+    function createInlineMathField(initialLatex, parentContainer) {
+        const mf = document.createElement('math-field');
+        mf.className = 'inline-math-field';
+        mf.setAttribute('virtual-keyboard-mode', 'manual');
+        mf.setAttribute('menu-toggle-hidden', '');
+        if (initialLatex) {
+            mf.value = initialLatex;
+        }
+        mf.addEventListener('input', () => {
+            const richParent = mf.closest('.rich-input-clone');
+            if (richParent) syncRichCloneToHiddenInput(richParent);
+        });
+        mf.addEventListener('focus', () => {
+            mathTarget = mf;
+        });
+        return mf;
+    }
+
+    function rememberMathTarget(event) {
+        let candidate = (event && event.target) ? event.target : document.activeElement;
+        if (candidate && candidate.closest && candidate.closest('.math-palette, .math-symbol-trigger')) {
+            return;
+        }
+        if (candidate && !isMathEditable(candidate) && candidate.closest) {
+            candidate = candidate.closest('math-field, [contenteditable="true"], input[type="text"], textarea');
+        }
+        if (isMathEditable(candidate)) {
+            mathTarget = candidate;
+            if (candidate.tagName === 'MATH-FIELD') {
+                mathSelectionRange = null;
+            } else if (candidate instanceof HTMLInputElement || candidate instanceof HTMLTextAreaElement) {
+                mathSelectionStart = candidate.selectionStart ?? candidate.value.length;
+                mathSelectionEnd = candidate.selectionEnd ?? mathSelectionStart;
+                mathSelectionRange = null;
+            } else if (candidate.isContentEditable) {
+                const selection = window.getSelection();
+                if (selection && selection.rangeCount) {
+                    const range = selection.getRangeAt(0);
+                    if (candidate.contains(range.commonAncestorContainer)) {
+                        mathSelectionRange = range.cloneRange();
+                    }
+                }
+            }
+        }
+    }
+
+    function toggleMathPalette(blockId, trigger) {
+        const palette = document.getElementById(`math-palette-${blockId}`);
+        if (!palette) return;
+        const opening = palette.hidden;
+        document.querySelectorAll('.math-palette').forEach((item) => { item.hidden = true; });
+        document.querySelectorAll('.math-symbol-trigger').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+        if (!opening) return;
+
+        const block = document.getElementById(blockId);
+        if (!mathTarget || !mathTarget.isConnected) {
+            mathTarget = block ? block.querySelector('math-field, .rich-input-clone, .question-title-input, input[type="text"], textarea, .writing-editor') : null;
+            mathSelectionStart = mathTarget instanceof HTMLInputElement || mathTarget instanceof HTMLTextAreaElement ? mathTarget.value.length : null;
+            mathSelectionEnd = mathSelectionStart;
+            mathSelectionRange = null;
+        }
+
+        if (!palette.dataset.built) {
+            const topBar = document.createElement('div');
+            topBar.className = 'soran-kb-top';
+            topBar.innerHTML = `
+                <div class="soran-kb-title">کیبۆردى سۆران بۆ هێما بیرکارى و فیزیایەکان</div>
+                <div class="soran-kb-actions">
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="moveMathCursor('${blockId}', 'moveToPreviousChar')">←</button>
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="moveMathCursor('${blockId}', 'moveToNextChar')">→</button>
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="backspaceMathTarget('${blockId}')">⌫ سڕینەوە</button>
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="exitMathBoxToText('${blockId}')">␣ بۆشایی / دەق</button>
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="undoMathTarget('${blockId}')">↩ گەڕانەوە</button>
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="redoMathTarget('${blockId}')">↪</button>
+                    <button type="button" class="soran-kb-tool" onpointerdown="event.preventDefault()" onclick="document.getElementById('math-palette-${blockId}').hidden = true;">✕ داخستن</button>
+                </div>
+            `;
+            palette.appendChild(topBar);
+
+            mathSymbolGroups.forEach((group) => {
+                const section = document.createElement('div');
+                section.className = 'soran-panel-section' + (group.priority ? ' priority-high' : '');
+                const header = document.createElement('div');
+                header.className = 'soran-section-header';
+                header.innerHTML = `<span>${group.title}</span>` + (group.badge ? `<span class="soran-badge">${group.badge}</span>` : '');
+                section.appendChild(header);
+
+                group.rows.forEach((row) => {
+                    const grid = document.createElement('div');
+                    grid.className = 'soran-key-grid' + (row.length === 14 ? ' grid-14' : '');
+                    row.forEach((item) => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'soran-key' + (item.num ? ' key-num' : '');
+                        button.innerHTML = `<span>${item.char}</span>` + (item.sub ? `<span class="lbl-sub">${item.sub}</span>` : '');
+                        button.addEventListener('pointerdown', (event) => event.preventDefault());
+                        button.addEventListener('click', () => insertMathSymbol(blockId, item.latex));
+                        grid.appendChild(button);
+                    });
+                    section.appendChild(grid);
+                });
+                palette.appendChild(section);
+            });
+            palette.dataset.built = 'true';
+        }
+        palette.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function exitMathBoxToText(blockId) {
+        if (mathTarget && mathTarget.tagName === 'MATH-FIELD') {
+            const parent = mathTarget.parentElement;
+            if (parent && parent.isContentEditable) {
+                const spaceNode = document.createTextNode('\u00A0');
+                if (mathTarget.nextSibling) {
+                    parent.insertBefore(spaceNode, mathTarget.nextSibling);
+                } else {
+                    parent.appendChild(spaceNode);
+                }
+                const range = document.createRange();
+                range.setStartAfter(spaceNode);
+                range.collapse(true);
+                const sel = window.getSelection();
+                if (sel) {
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }
+                parent.focus();
+                mathTarget = parent;
+                mathSelectionRange = range.cloneRange();
+                if (parent.classList.contains('rich-input-clone')) {
+                    syncRichCloneToHiddenInput(parent);
+                }
+                return;
+            }
+        }
+        insertMathSymbol(blockId, '\\;');
+    }
+
+    function insertMathSymbol(blockId, latex) {
+        const block = document.getElementById(blockId);
+        if (!mathTarget || !mathTarget.isConnected) {
+            mathTarget = block ? block.querySelector('math-field, .rich-input-clone, .question-title-input, input[type="text"], textarea, .writing-editor') : null;
+        }
+        if (!mathTarget) return;
+
+        // 1. If currently inside an inline math-field, insert directly with MathLive!
+        if (mathTarget.tagName === 'MATH-FIELD') {
+            mathTarget.focus();
+            if (typeof mathTarget.insert === 'function') {
+                mathTarget.insert(latex, { selectionMode: 'placeholder' });
+            } else if (typeof mathTarget.executeCommand === 'function') {
+                mathTarget.executeCommand(['insert', latex]);
+            }
+            const richParent = mathTarget.closest('.rich-input-clone');
+            if (richParent) syncRichCloneToHiddenInput(richParent);
+            return;
+        }
+
+        // 2. If inside a standard <input> or <textarea>, seamlessly upgrade it to a rich math-capable line!
+        if (mathTarget instanceof HTMLInputElement || mathTarget instanceof HTMLTextAreaElement) {
+            mathTarget = upgradeFieldToRichMath(mathTarget);
+        }
+
+        // 3. Now mathTarget is a contenteditable element (.rich-input-clone or .writing-editor)
+        if (mathTarget && mathTarget.isContentEditable) {
+            const mf = createInlineMathField('', mathTarget);
+            const selection = window.getSelection();
+            let range = null;
+            if (selection && selection.rangeCount) {
+                const r = selection.getRangeAt(0);
+                if (mathTarget.contains(r.commonAncestorContainer)) {
+                    range = r.cloneRange();
+                }
+            }
+            if (!range && mathSelectionRange && mathTarget.contains(mathSelectionRange.commonAncestorContainer)) {
+                range = mathSelectionRange.cloneRange();
+            }
+            if (!range) {
+                range = document.createRange();
+                range.selectNodeContents(mathTarget);
+                range.collapse(false);
+            }
+
+            range.deleteContents();
+            const spaceAfter = document.createTextNode('\u00A0');
+            range.insertNode(spaceAfter);
+            range.insertNode(mf);
+
+            mathTarget = mf;
+            if (mf.closest('.rich-input-clone')) {
+                syncRichCloneToHiddenInput(mf.closest('.rich-input-clone'));
+            }
+
+            setTimeout(() => {
+                mf.focus();
+                if (typeof mf.insert === 'function') {
+                    mf.insert(latex, { selectionMode: 'placeholder' });
+                } else {
+                    mf.value = latex;
+                }
+                const richParent = mf.closest('.rich-input-clone');
+                if (richParent) syncRichCloneToHiddenInput(richParent);
+            }, 10);
+        }
+    }
+
+    function moveMathCursor(blockId, direction) {
+        if (mathTarget && mathTarget.tagName === 'MATH-FIELD') {
+            mathTarget.focus();
+            if (typeof mathTarget.executeCommand === 'function') {
+                mathTarget.executeCommand([direction]);
+            }
+        }
+    }
+
+    function backspaceMathTarget(blockId) {
+        if (mathTarget && mathTarget.tagName === 'MATH-FIELD') {
+            const richParent = mathTarget.closest('.rich-input-clone') || mathTarget.closest('.writing-editor');
+            if (!mathTarget.value || mathTarget.value.trim() === '') {
+                const toRemove = mathTarget;
+                if (richParent) {
+                    mathTarget = richParent;
+                    toRemove.remove();
+                    richParent.focus();
+                    if (richParent.classList.contains('rich-input-clone')) {
+                        syncRichCloneToHiddenInput(richParent);
+                    }
+                }
+                return;
+            }
+            mathTarget.focus();
+            if (typeof mathTarget.executeCommand === 'function') {
+                mathTarget.executeCommand(['deleteBackward']);
+            }
+            if (richParent && richParent.classList.contains('rich-input-clone')) {
+                syncRichCloneToHiddenInput(richParent);
+            }
+            return;
+        }
+        if (mathTarget && (mathTarget instanceof HTMLInputElement || mathTarget instanceof HTMLTextAreaElement)) {
+            const start = mathSelectionStart ?? mathTarget.selectionStart ?? mathTarget.value.length;
+            const end = mathSelectionEnd ?? mathTarget.selectionEnd ?? start;
+            if (start !== end) {
+                mathTarget.setRangeText('', start, end, 'end');
+            } else if (start > 0) {
+                mathTarget.setRangeText('', start - 1, start, 'end');
+            }
+            mathTarget.focus();
+            mathSelectionStart = mathTarget.selectionStart;
+            mathSelectionEnd = mathTarget.selectionEnd;
+            return;
+        }
+        if (mathTarget && mathTarget.isContentEditable) {
+            mathTarget.focus();
+            document.execCommand('delete', false, null);
+            if (mathTarget.classList.contains('rich-input-clone')) {
+                syncRichCloneToHiddenInput(mathTarget);
+            }
+        }
+    }
+
+    function undoMathTarget(blockId) {
+        if (mathTarget && mathTarget.tagName === 'MATH-FIELD') {
+            mathTarget.focus();
+            if (typeof mathTarget.executeCommand === 'function') {
+                mathTarget.executeCommand(['undo']);
+            }
+        } else if (mathTarget && mathTarget.isContentEditable) {
+            mathTarget.focus();
+            document.execCommand('undo', false, null);
+        }
+    }
+
+    function redoMathTarget(blockId) {
+        if (mathTarget && mathTarget.tagName === 'MATH-FIELD') {
+            mathTarget.focus();
+            if (typeof mathTarget.executeCommand === 'function') {
+                mathTarget.executeCommand(['redo']);
+            }
+        } else if (mathTarget && mathTarget.isContentEditable) {
+            mathTarget.focus();
+            document.execCommand('redo', false, null);
+        }
+    }
+
+    document.addEventListener('focusin', (event) => {
+        rememberMathTarget(event);
+    });
+    document.addEventListener('pointerup', (event) => {
+        rememberMathTarget(event);
+    });
+    document.addEventListener('keyup', (event) => {
+        rememberMathTarget(event);
+    });
+    document.addEventListener('selectionchange', () => {
+        if (isMathEditable(document.activeElement)) rememberMathTarget();
+    });
+
     function addQuestionBlock(type) {
         blockCount++;
         const area = document.getElementById('questions-area');
@@ -1691,12 +3001,25 @@
         let adjustText = currentLang === 'ku' ? 'ڕێکخستن:' : (currentLang === 'ar' ? 'تعديل:' : 'Adjust:');
         let scoreText = currentLang === 'ku' ? 'نمرە' : (currentLang === 'ar' ? 'علامة' : 'Score');
         let addText = currentLang === 'ku' ? '➕ زیادکردن' : (currentLang === 'ar' ? '➕ إضافة' : '➕ Add');
+        let kbBtnText = currentLang === 'ku' ? '⌨️ کیبۆردی بیرکاری و فیزیا' : (currentLang === 'ar' ? '⌨️ لوحة الرياضيات والفيزياء' : '⌨️ Math & Physics');
+        const mathTools = `
+            <div class="math-tool-wrapper">
+                <button type="button" class="math-symbol-trigger" aria-label="کیبۆردى سۆران بۆ هێما بیرکارى و فیزیایەکان" aria-expanded="false" aria-controls="math-palette-${blockId}" onpointerdown="rememberMathTarget(event)" onclick="toggleMathPalette('${blockId}', this)" title="کیبۆردى سۆران بۆ هێما بیرکارى و فیزیایەکان">${kbBtnText}</button>
+                <div class="math-palette" id="math-palette-${blockId}" hidden></div>
+            </div>
+        `;
         
         let controlBar = `
             <div class="question-control-bar">
                 <span>${adjustText}</span>
                 <select class="font-selector" onchange="changeBlockFont(this)">
+                    <option value="font-moe" ${currentGlobalFont === 'font-moe' ? 'selected' : ''}>فۆنتی وەزارەتی پەروەردە (MOE)</option>
                     <option value="font-noto" ${currentGlobalFont === 'font-noto' ? 'selected' : ''}>Noto Naskh</option>
+                    <option value="font-rudaw" ${currentGlobalFont === 'font-rudaw' ? 'selected' : ''}>ڕووداو (Rudaw)</option>
+                    <option value="font-speda" ${currentGlobalFont === 'font-speda' ? 'selected' : ''}>سپێدە (Speda)</option>
+                    <option value="font-nrt" ${currentGlobalFont === 'font-nrt' ? 'selected' : ''}>ئێن ئاڕ تی (NRT)</option>
+                    <option value="font-ava" ${currentGlobalFont === 'font-ava' ? 'selected' : ''}>ئاڤا (Ava)</option>
+                    <option value="font-korsat" ${currentGlobalFont === 'font-korsat' ? 'selected' : ''}>کوردسات (Kurdsat)</option>
                     <option value="font-ibm" ${currentGlobalFont === 'font-ibm' ? 'selected' : ''}>IBM Plex</option>
                     <option value="font-vazir" ${currentGlobalFont === 'font-vazir' ? 'selected' : ''}>Vazirmatn</option>
                     <option value="font-amiri" ${currentGlobalFont === 'font-amiri' ? 'selected' : ''}>Amiri</option>
@@ -1714,6 +3037,7 @@
                     <button class="bold-btn ${bold ? 'active' : ''}" id="bold-btn-${blockId}" onclick="toggleQuestionBold('${blockId}')" title="تۆخ کردن">B</button>
                 </div>
                 <button class="btn-page-break" onclick="togglePageBreak('${blockId}')">${pageBreakText}</button>
+                ${mathTools}
                 <button class="btn-delete-block" onclick="deleteBlock('${blockId}')">${deleteText}</button>
             </div>
             <div class="page-break-indicator">${pageBreakIndicatorText}</div>
@@ -1745,7 +3069,7 @@
         let reasonsTitle = currentLang === 'ku' ? 'هۆکارەکان چییە؟' : (currentLang === 'ar' ? 'ما هي الأسباب؟' : 'What are the reasons?');
         let countTitle = currentLang === 'ku' ? 'خاڵەکان بنووسە:' : (currentLang === 'ar' ? 'اكتب النقاط:' : 'Write the points:');
         let mapTitle = currentLang === 'ku' ? 'نەخشەی چەمکی خوارەوە تەواو بکە:' : (currentLang === 'ar' ? 'أكمل خريطة المفاهيم التالية:' : 'Complete the concept map below:');
-        let writingTitle = currentLang === 'ku' ? 'لەم بۆشاییەدا هەر شتێک بنووسە:' : (currentLang === 'ar' ? 'اكتب أي شيء في هذه المساحة:' : 'Write anything in this space:');
+        let writingTitle = currentLang === 'ku' ? 'پرسیاری ئازاد بنووسە:' : (currentLang === 'ar' ? 'اكتب سؤالا مفتوحا:' : 'Write an open question:');
         let darashtinTitle = currentLang === 'ku' ? 'بابەتێکی داڕشتن لەسەر ئەم ناوەی خوارەوە بنووسە:' : (currentLang === 'ar' ? 'اكتب موضوع إنشاء حول العنوان التالي:' : 'Write an essay on the following topic:');
         let imlaTitle = currentLang === 'ku' ? 'ئەم وشە و ڕستانەی خوارەوە بنووسەوە:' : (currentLang === 'ar' ? 'اكتب الكلمات والجمل التالية:' : 'Write the following words and sentences:');
         let khoshnusiTitle = currentLang === 'ku' ? 'ڕستەکە بە فۆنتێکی جوان بنووسەوە، پاشان خوێندکار دووبارە بنوسێتەوە:' : (currentLang === 'ar' ? 'اكتب الجملة بخط جميل، ثم يكتبها الطالب مرة أخرى:' : 'Write the sentence in beautiful handwriting, then the student rewrites it:');
@@ -1753,22 +3077,32 @@
         if (type === 'multiple-choice') {
             let optionPlaceholder = currentLang === 'ku' ? 'بژاردە' : (currentLang === 'ar' ? 'خيار' : 'Option');
             let questionPlaceholder = currentLang === 'ku' ? 'پرسیار...' : (currentLang === 'ar' ? 'سؤال...' : 'Question...');
+            let mcqChooseImage = currentLang === 'ku' ? 'وێنە هەڵبژێرە' : (currentLang === 'ar' ? 'اختر صورة' : 'Choose image');
             let row1Text = currentLang === 'ku' ? '١ ڕیز' : (currentLang === 'ar' ? 'صف واحد' : '1 Row');
             let row2Text = currentLang === 'ku' ? '٢ ڕیز' : (currentLang === 'ar' ? 'صفان' : '2 Rows');
+            const imageId = `mcq-${blockCount}-1`;
             innerHTMLContent = `
                 ${controlBar}
                 ${createHeaderHTML(mcqTitle)}
                 <div id="sub-list-${blockCount}" style="margin-top: 5px; display: flex; flex-direction: column; gap: 4px;">
                     <div class="mcq-item-box" id="mcq-item-${blockCount}-1">
-                        <div style="display:flex; justify-content:space-between; align-items:center; gap:5px;">
-                            <div style="display:flex; align-items:center; gap:5px; width: 80%;">
+                        <div class="mcq-question-row">
+                            <div class="mcq-question-field">
                                 <span class="sub-num" style="font-weight:bold; font-size:${size}px;">١.</span>
                                 <input type="text" style="width:100%; border:none; font-weight:bold; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${questionPlaceholder}">
                             </div>
-                            <div style="display:flex; gap:3px;">
-                                <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#34495e;" onclick="toggleRowLayout(${blockCount}, 1, 'options-1-row')">${row1Text}</button>
-                                <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#7f8c8d;" onclick="toggleRowLayout(${blockCount}, 1, 'options-2-row')">${row2Text}</button>
+                            <div class="mcq-row-actions">
+                                <label class="mcq-image-upload" for="mcq-image-input-${imageId}" title="${mcqChooseImage}" aria-label="${mcqChooseImage}">🖼️</label>
+                                <input id="mcq-image-input-${imageId}" type="file" accept="image/*" onchange="previewMcqImage(event, '${imageId}')" style="display:none;">
+                                <button class="btn-action" style="background-color:#34495e;" onclick="toggleRowLayout(${blockCount}, 1, 'options-1-row')">${row1Text}</button>
+                                <button class="btn-action" style="background-color:#7f8c8d;" onclick="toggleRowLayout(${blockCount}, 1, 'options-2-row')">${row2Text}</button>
                             </div>
+                        </div>
+                        <img id="img-preview-${imageId}" class="uploaded-img mcq-image-preview" alt="وێنەی پرسیار" style="width:1in; height:auto;">
+                        <div class="image-controls" id="img-controls-${imageId}">
+                            <button type="button" title="بچووککردن" onclick="changeMcqImageSize('${imageId}', -0.25)">➖</button>
+                            <span class="image-size-label" id="img-size-label-${imageId}">1 in</span>
+                            <button type="button" title="گەورەکردن" onclick="changeMcqImageSize('${imageId}', 0.25)">➕</button>
                         </div>
                         <div class="options-container options-1-row" id="options-${blockCount}-1">
                             <div class="option-item"><span style="font-size:${size}px;">A:</span><input type="text" placeholder="${optionPlaceholder}" style="font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}"></div>
@@ -1785,7 +3119,7 @@
             innerHTMLContent = `
                 ${controlBar}
                 ${createHeaderHTML(tfTitle)}
-                <div id="sub-list-${blockCount}" style="margin-top: 5px; display: flex; flex-direction: column; gap: 6px;">
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display:flex; flex-direction:column; gap:6px;">
                     <div style="display:flex; justify-content:space-between; align-items: center;">
                         <span class="sub-num" style="font-weight:bold; font-size:${size}px; margin-left: 5px;">١.</span>
                         <input type="text" style="width:85%; border:none; padding: 3px; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${sentencePlaceholder}">
@@ -1799,10 +3133,10 @@
             innerHTMLContent = `
                 ${controlBar}
                 ${createHeaderHTML(blankTitle)}
-                <div id="sub-list-${blockCount}" style="margin-top: 5px; display: flex; flex-direction: column; gap: 6px;">
-                    <div style="display:flex; align-items: center;">
-                        <span class="sub-num" style="font-weight:bold; font-size:${size}px; margin-left: 5px;">١.</span>
-                        <input type="text" style="width:100%; border:none; padding: 3px; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${sentencePlaceholder}">
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display:flex; flex-direction:column; gap:6px;">
+                    <div style="display:flex; align-items:center;">
+                        <span class="sub-num" style="font-weight:bold; font-size:${size}px; margin-left:5px;">١.</span>
+                        <input type="text" style="width:100%; border:none; padding:3px; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${sentencePlaceholder}">
                     </div>
                 </div>
                 <button class="btn-action" onclick="addSubItem(${blockCount}, 'blank')">${addText}</button>
@@ -1836,8 +3170,8 @@
                     <div>
                         <span class="sub-num" style="font-weight:bold; font-size:${size}px;">١.</span>
                         <input type="text" style="font-weight:bold; width:30%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${termPlaceholder}">
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
                     </div>
                 </div>
                 <button class="btn-action" onclick="addSubItem(${blockCount}, 'definition')">${addText}</button>
@@ -1874,7 +3208,7 @@
             innerHTMLContent = `
                 ${controlBar}
                 ${createHeaderHTML(diffTitle)}
-                <div id="sub-list-${blockCount}" style="margin-top:5px; display: flex; flex-direction: column; gap: 8px;">
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display:flex; flex-direction:column; gap:8px;">
                     <div class="difference-grid" id="diff-grid-${blockCount}">
                         <div class="difference-item" id="diff-item-${blockCount}-1">
                             <textarea placeholder="${item1Placeholder}" style="font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}"></textarea>
@@ -1893,12 +3227,12 @@
             innerHTMLContent = `
                 ${controlBar}
                 ${createHeaderHTML(reasonsTitle)}
-                <div id="sub-list-${blockCount}" style="margin-top:5px; display: flex; flex-direction: column; gap: 8px;">
+                <div id="sub-list-${blockCount}" style="margin-top:5px; display:flex; flex-direction:column; gap:8px;">
                     <div>
-                        <span class="sub-num" style="font-weight:bold; font-size:${size}px; margin-left: 5px;">١.</span>
+                        <span class="sub-num" style="font-weight:bold; font-size:${size}px; margin-left:5px;">١.</span>
                         <input type="text" style="width:100%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${qPlaceholder}">
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
                     </div>
                 </div>
                 <button class="btn-action" onclick="addSubItem(${blockCount}, 'reasons')">${addText}</button>
@@ -1918,8 +3252,8 @@
                             <button class="btn-action" style="margin:0; padding:3px 8px; font-size:10px; background-color: #34495e;" onclick="addCountingSubPoint(${blockCount}, 1)">${addPointText}</button>
                         </div>
                         <div id="counting-sub-list-${blockCount}-1" style="margin-top:4px; padding-right:20px; display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.6;">
-                            <div style="font-size:${size}px;">أ. _________________________________</div>
-                            <div style="font-size:${size}px;">ب. _________________________________</div>
+                            <div contenteditable="true" style="font-size:${size}px; outline:none;">أ. _________________________________</div>
+                            <div contenteditable="true" style="font-size:${size}px; outline:none;">ب. _________________________________</div>
                         </div>
                     </div>
                 </div>
@@ -1945,11 +3279,27 @@
             `;
         } else if (type === 'writing') {
             let writePlaceholder = currentLang === 'ku' ? 'لێرەدا هەر شتێک بنووسە...' : (currentLang === 'ar' ? 'اكتب أي شيء هنا...' : 'Write anything here...');
+            let chooseImageText = currentLang === 'ku' ? 'وێنە هەڵبژێرە' : (currentLang === 'ar' ? 'اختر صورة' : 'Choose image');
+            let alignRightText = currentLang === 'ku' ? 'ڕاست' : (currentLang === 'ar' ? 'يمين' : 'Right');
+            let alignLeftText = currentLang === 'ku' ? 'چەپ' : (currentLang === 'ar' ? 'يسار' : 'Left');
             innerHTMLContent = `
                 ${controlBar}
                 ${createHeaderHTML(writingTitle)}
-                <div style="margin-top: 8px;">
-                    <textarea class="writing-textarea" placeholder="${writePlaceholder}" style="font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}"></textarea>
+                <div class="writing-composer">
+                    <div class="writing-editor-toolbar">
+                        <label class="mcq-image-upload writing-image-upload" for="writing-image-input-${blockCount}" title="${chooseImageText}" aria-label="${chooseImageText}" onclick="rememberWritingSelection(${blockCount})">🖼️ ${chooseImageText}</label>
+                        <input id="writing-image-input-${blockCount}" type="file" accept="image/*" onchange="insertWritingImage(event, ${blockCount})" style="display:none;">
+                        <div class="image-controls writing-editor-tools" id="writing-image-tools-${blockCount}">
+                            <button type="button" title="بچووککردن" onclick="changeWritingImageSize(${blockCount}, -10)">➖</button>
+                            <span class="image-size-label" id="img-size-label-${blockCount}">40%</span>
+                            <button type="button" title="گەورەکردن" onclick="changeWritingImageSize(${blockCount}, 10)">➕</button>
+                            <input type="range" class="image-size-slider" id="img-slider-${blockCount}" min="20" max="100" step="5" value="40" oninput="setWritingImageSize(${blockCount}, this.value)">
+                            <button type="button" data-image-align="right" onclick="alignWritingImage(${blockCount}, 'right')">${alignRightText}</button>
+                            <button type="button" data-image-align="left" onclick="alignWritingImage(${blockCount}, 'left')">${alignLeftText}</button>
+                        </div>
+                    </div>
+                    <div id="writing-editor-${blockCount}" class="writing-editor" contenteditable="true" data-placeholder="${writePlaceholder}" style="font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" onkeydown="handleWritingEnter(event, ${blockCount})" onkeyup="rememberWritingSelection(${blockCount})" onmouseup="rememberWritingSelection(${blockCount})" oninput="rememberWritingSelection(${blockCount})"></div>
+                    </div>
                 </div>
             `;
         } else if (type === 'darashtin') {
@@ -1962,9 +3312,9 @@
                     <div>
                         <span class="sub-num" style="font-weight:bold; font-size:${size}px;">١.</span>
                         <input type="text" style="font-weight:bold; width:40%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${titlePlaceholder}">
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
                     </div>
                 </div>
                 <button class="btn-action" onclick="addSubItem(${blockCount}, 'darashtin')">${addLineText}</button>
@@ -1978,8 +3328,8 @@
                     <div>
                         <span class="sub-num" style="font-weight:bold; font-size:${size}px;">١.</span>
                         <input type="text" style="font-weight:bold; width:40%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${wordPlaceholder}">
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                        <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                        <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
                     </div>
                 </div>
                 <button class="btn-action" onclick="addSubItem(${blockCount}, 'imla')">${addText}</button>
@@ -2018,8 +3368,9 @@
         const grid = document.getElementById(`diff-grid-${blockId}`);
         if (grid) {
             const count = grid.children.length + 1;
-            const size = questionFontSizes[blockId] || 16;
-            const bold = questionBold[blockId] || false;
+            const rId = String(blockId).startsWith('block-') ? blockId : `block-${blockId}`;
+            const size = questionFontSizes[rId] || 16;
+            const bold = questionBold[rId] || false;
             const item = document.createElement('div');
             item.className = 'difference-item';
             item.id = `diff-item-${blockId}-${count}`;
@@ -2036,25 +3387,36 @@
     function addMCQQuestionItem(blockId) {
         const list = document.getElementById(`sub-list-${blockId}`);
         const count = list.children.length + 1;
-        const size = questionFontSizes[blockId] || 16;
-        const bold = questionBold[blockId] || false;
+        const rId = String(blockId).startsWith('block-') ? blockId : `block-${blockId}`;
+        const size = questionFontSizes[rId] || 16;
+        const bold = questionBold[rId] || false;
         const item = document.createElement('div');
         item.className = 'mcq-item-box';
         item.id = `mcq-item-${blockId}-${count}`;
         let questionPlaceholder = currentLang === 'ku' ? 'پرسیار...' : (currentLang === 'ar' ? 'سؤال...' : 'Question...');
         let optionPlaceholder = currentLang === 'ku' ? 'بژاردە' : (currentLang === 'ar' ? 'خيار' : 'Option');
+        let mcqChooseImage = currentLang === 'ku' ? 'وێنە هەڵبژێرە' : (currentLang === 'ar' ? 'اختر صورة' : 'Choose image');
         let row1Text = currentLang === 'ku' ? '١ ڕیز' : (currentLang === 'ar' ? 'صف واحد' : '1 Row');
         let row2Text = currentLang === 'ku' ? '٢ ڕیز' : (currentLang === 'ar' ? 'صفان' : '2 Rows');
+        const imageId = `mcq-${blockId}-${count}`;
         item.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:5px;">
-                <div style="display:flex; align-items:center; gap:5px; width:80%;">
+            <div class="mcq-question-row">
+                <div class="mcq-question-field">
                     <span class="sub-num" style="font-weight:bold; font-size:${size}px;">${count}.</span>
                     <input type="text" style="width:100%; border:none; font-weight:bold; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${questionPlaceholder}">
                 </div>
-                <div style="display:flex; gap:3px;">
-                    <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#34495e;" onclick="toggleRowLayout(${blockId}, ${count}, 'options-1-row')">${row1Text}</button>
-                    <button class="btn-action" style="margin:0; padding:2px 6px; font-size:10px; background-color:#7f8c8d;" onclick="toggleRowLayout(${blockId}, ${count}, 'options-2-row')">${row2Text}</button>
+                <div class="mcq-row-actions">
+                    <label class="mcq-image-upload" for="mcq-image-input-${imageId}" title="${mcqChooseImage}" aria-label="${mcqChooseImage}">🖼️</label>
+                    <input id="mcq-image-input-${imageId}" type="file" accept="image/*" onchange="previewMcqImage(event, '${imageId}')" style="display:none;">
+                    <button class="btn-action" style="background-color:#34495e;" onclick="toggleRowLayout(${blockId}, ${count}, 'options-1-row')">${row1Text}</button>
+                    <button class="btn-action" style="background-color:#7f8c8d;" onclick="toggleRowLayout(${blockId}, ${count}, 'options-2-row')">${row2Text}</button>
                 </div>
+            </div>
+            <img id="img-preview-${imageId}" class="uploaded-img mcq-image-preview" alt="وێنەی پرسیار" style="width:1in; height:auto;">
+            <div class="image-controls" id="img-controls-${imageId}">
+                <button type="button" title="بچووککردن" onclick="changeMcqImageSize('${imageId}', -0.25)">➖</button>
+                <span class="image-size-label" id="img-size-label-${imageId}">1 in</span>
+                <button type="button" title="گەورەکردن" onclick="changeMcqImageSize('${imageId}', 0.25)">➕</button>
             </div>
             <div class="options-container options-1-row" id="options-${blockId}-${count}">
                 <div class="option-item"><span style="font-size:${size}px;">A:</span><input type="text" placeholder="${optionPlaceholder}" style="font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}"></div>
@@ -2070,8 +3432,9 @@
     function addCountingMainItem(blockId) {
         const list = document.getElementById(`sub-list-${blockId}`);
         const count = list.children.length + 1;
-        const size = questionFontSizes[blockId] || 16;
-        const bold = questionBold[blockId] || false;
+        const rId = String(blockId).startsWith('block-') ? blockId : `block-${blockId}`;
+        const size = questionFontSizes[rId] || 16;
+        const bold = questionBold[rId] || false;
         const div = document.createElement('div');
         div.id = `counting-item-${blockId}-${count}`;
         div.style = "padding-bottom: 5px; margin-bottom: 5px;";
@@ -2084,8 +3447,8 @@
                 <button class="btn-action" style="margin:0; padding:3px 8px; font-size:10px; background-color: #34495e;" onclick="addCountingSubPoint(${blockId}, ${count})">${addPointText}</button>
             </div>
             <div id="counting-sub-list-${blockId}-${count}" style="margin-top:4px; padding-right:20px; display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.6;">
-                <div style="font-size:${size}px;">أ. _________________________________</div>
-                <div style="font-size:${size}px;">ب. _________________________________</div>
+                <div contenteditable="true" style="font-size:${size}px; outline:none;">أ. _________________________________</div>
+                <div contenteditable="true" style="font-size:${size}px; outline:none;">ب. _________________________________</div>
             </div>
         `;
         list.appendChild(div);
@@ -2096,8 +3459,10 @@
         const subList = document.getElementById(`counting-sub-list-${blockId}-${itemId}`);
         const count = subList.children.length;
         const letter = arabicLetters[count % arabicLetters.length];
-        const size = questionFontSizes[blockId] || 16;
+        const rId = String(blockId).startsWith('block-') ? blockId : `block-${blockId}`;
+        const size = questionFontSizes[rId] || 16;
         const point = document.createElement('div');
+        point.contentEditable = 'true';
         point.style.fontSize = size + 'px';
         point.innerHTML = `${letter}. _________________________________`;
         subList.appendChild(point);
@@ -2111,8 +3476,9 @@
     function addSubItem(id, type) {
         const list = document.getElementById(`sub-list-${id}`);
         const count = list.children.length + 1;
-        const size = questionFontSizes[id] || 16;
-        const bold = questionBold[id] || false;
+        const rId = String(id).startsWith('block-') ? id : `block-${id}`;
+        const size = questionFontSizes[rId] || 16;
+        const bold = questionBold[rId] || false;
         const div = document.createElement('div');
         if (type === 'true-false') {
             let sentencePlaceholder = currentLang === 'ku' ? 'لێرە ڕستەکە بنووسە...' : (currentLang === 'ar' ? 'اكتب الجملة هنا...' : 'Write the sentence here...');
@@ -2134,8 +3500,8 @@
             div.innerHTML = `
                 <span class="sub-num" style="font-weight:bold; font-size:${size}px;">${count}.</span>
                 <input type="text" style="font-weight:bold; width:30%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${termPlaceholder}">
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
             `;
         } else if (type === 'image-question') {
             let qPlaceholder = currentLang === 'ku' ? 'پرسیار...' : (currentLang === 'ar' ? 'سؤال...' : 'Question...');
@@ -2149,20 +3515,20 @@
             div.innerHTML = `
                 <span class="sub-num" style="font-weight:bold; font-size:${size}px; margin-left: 5px;">${count}.</span>
                 <input type="text" style="width:100%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${qPlaceholder}">
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
             `;
         } else if (type === 'darashtin') {
             div.innerHTML = `
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
             `;
         } else if (type === 'imla') {
             let wordPlaceholder = currentLang === 'ku' ? 'زاراوە یان ڕستەی ئیملا...' : (currentLang === 'ar' ? 'كلمة أو جملة إملاء...' : 'Dictation word or sentence...');
             div.innerHTML = `
                 <span class="sub-num" style="font-weight:bold; font-size:${size}px;">${count}.</span>
                 <input type="text" style="font-weight:bold; width:40%; border:none; background:transparent; font-size:${size}px; ${bold ? 'font-weight:bold;' : ''}" placeholder="${wordPlaceholder}">
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
-                <div class="simple-answer-line" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
+                <div class="simple-answer-line" contenteditable="true" style="height:${size + 4}px;"></div>
             `;
         }
         list.appendChild(div);
@@ -2174,8 +3540,9 @@
         const colB = document.getElementById(`matching-B-${id}`);
         const countA = colA.children.length;
         const letterB = arabicLetters[(colB.children.length - 1) % arabicLetters.length];
-        const size = questionFontSizes[id] || 16;
-        const bold = questionBold[id] || false;
+        const rId = String(id).startsWith('block-') ? id : `block-${id}`;
+        const size = questionFontSizes[rId] || 16;
+        const bold = questionBold[rId] || false;
         let termPlaceholder = currentLang === 'ku' ? 'زاراوە' : (currentLang === 'ar' ? 'مصطلح' : 'Term');
         let defPlaceholder = currentLang === 'ku' ? 'پێناسە' : (currentLang === 'ar' ? 'تعريف' : 'Definition');
         const rowA = document.createElement('div');
@@ -2197,6 +3564,7 @@
                 const img = document.getElementById(`img-preview-${id}`);
                 const text = document.getElementById(`img-text-${id}`);
                 const controls = document.getElementById(`img-controls-${id}`);
+                if (!img) return;
                 img.src = e.target.result;
                 img.style.display = 'block';
                 if (text) text.style.display = 'none';
@@ -2208,9 +3576,34 @@
                 if (label) label.textContent = '100%';
                 const slider = document.getElementById(`img-slider-${id}`);
                 if (slider) slider.value = 100;
+                if (img.classList.contains('writing-image-preview')) {
+                    alignWritingImage(id, imageAlignments[id] || 'right');
+                    img.onload = () => updateWritingImageLayout(id);
+                    if (img.complete) updateWritingImageLayout(id);
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    function previewMcqImage(event, id) {
+        const input = event.target;
+        if (!input.files || !input.files[0]) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById(`img-preview-${id}`);
+            const controls = document.getElementById(`img-controls-${id}`);
+            if (!img) return;
+            img.src = e.target.result;
+            img.style.display = 'block';
+            img.style.width = '1in';
+            img.style.height = 'auto';
+            imageSizes[`block-${id}`] = 1;
+            if (controls) controls.classList.add('show');
+            const label = document.getElementById(`img-size-label-${id}`);
+            if (label) label.textContent = '1 in';
+        };
+        reader.readAsDataURL(input.files[0]);
     }
 
     function deleteBlock(id) {
@@ -2229,7 +3622,8 @@
     }
 
     function changeGlobalFont(fontClass) {
-        document.body.className = fontClass;
+        document.body.classList.remove('font-moe', 'font-noto', 'font-rudaw', 'font-speda', 'font-nrt', 'font-ava', 'font-korsat', 'font-ibm', 'font-vazir', 'font-amiri', 'font-changa', 'font-tajawal', 'font-cairo', 'font-messiri', 'font-kufam', 'font-readex');
+        document.body.classList.add(fontClass);
         document.querySelectorAll('.question-block').forEach(block => {
             const hasPageBreak = block.classList.contains('has-page-break');
             const classes = block.className.split(' ').filter(c => !c.startsWith('font-'));
